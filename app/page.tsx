@@ -158,8 +158,6 @@ export default function Home() {
         <section id="kontakt">
           <div className="wrap contact" data-reveal>
             <span className="label">Kontakt</span>
-            <h2>Načrtujete novogradnjo?</h2>
-            <p className="lead">Pišite mi in skupaj preveriva, kaj bi KNX pomenil za vašo hišo.</p>
             <CopyEmail email={site.email} />
             <p>
               <a className="link" href={site.linkedin} target="_blank" rel="noopener noreferrer">
