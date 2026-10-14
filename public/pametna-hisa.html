@@ -207,6 +207,8 @@ figure{margin:0}
 .sw.on .btn{fill:#22b45a;stroke:#22b45a}
 .sw .st{font:600 9px/1 var(--font-mono,ui-monospace,monospace);fill:#e5322d;stroke:none;transition:fill .35s}
 .sw.on .st{fill:#22b45a}
+.dev.rx .alarm .aw,.dev.tx .alarm .aw{animation:alw .5s ease-in-out infinite alternate}
+@keyframes alw{from{opacity:1}to{opacity:.25}}
 .sw path.edge{stroke:#9f1f1c;stroke-width:1.9;fill:none;transform:translateY(0);transition:transform .35s var(--ease),stroke .35s}
 .sw.on path.edge{transform:translateY(-11.6px)}
 .sw.on path.edge{stroke:#13783a}
@@ -704,7 +706,9 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var ty=d.top?145:155;
     g.innerHTML='<path class="drop" d="M'+d.x+' '+ty+' V'+(d.top?96:204)+'"/><circle class="tap" cx="'+d.x+'" cy="'+ty+'" r="3"/>'+
       '<rect class="node" x="'+(d.x-w/2)+'" y="'+y+'" width="'+w+'" height="52" rx="8"/>'+
-      (k==='sti'
+      (k==='alm'
+        ? '<g class="alarm" transform="translate('+(d.x-33)+' '+(y+4)+')" aria-label="Alarm"><rect x="0" y="0" width="28" height="28" rx="6.5" fill="#cc0000"/><rect x="2.6" y="2.6" width="22.8" height="22.8" rx="4.2" fill="none" stroke="#fff" stroke-width="1"/><path fill="#fff" d="M14 5.4a1.1 1.1 0 0 1 1.1 1.1c2.5.7 3.6 2.7 3.6 5.2v3.7l1.8 2.2H7.5l1.8-2.2v-3.7c0-2.5 1.1-4.5 3.6-5.2A1.1 1.1 0 0 1 14 5.4z"/><path fill="#fff" d="M12.2 19.6a1.8 1.2 0 0 0 3.6 0z"/><g class="aw" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round"><path d="M6.6 9.8q-1.4 2.8 0 5.6M4.8 8.8q-1.6 3.6 0 7.2M21.4 9.8q1.4 2.8 0 5.6M23.2 8.8q1.6 3.6 0 7.2"/></g><text x="33" y="19" fill="#fff" style="font:700 9.5px var(--font-sans,Inter,sans-serif);letter-spacing:.6px">ALARM</text></g>'
+        : k==='sti'
         ? '<g class="sw" transform="translate('+(d.x-11)+' '+(y+6)+')" aria-label="Stikalo"><rect class="plate" x="0.65" y="0.65" width="20.7" height="20.7" rx="3.5"/><rect class="well" x="3.4" y="3.4" width="15.2" height="15.2" rx="2"/><rect class="btn" x="5.6" y="5.6" width="10.8" height="10.8" rx="1.2"/><path class="edge" d="M6.2 16.9h9.6"/><text class="st" x="27" y="15" >OFF</text></g>'
         : k==='sen'
         ? '<g class="shade" transform="translate('+(d.x-15)+' '+(y+6)+')" aria-label="Senčila"><rect class="fr" x="0.65" y="0.65" width="28.7" height="22.7" rx="2"/><path d="M0.65 4h28.7"/><g class="slats"><path d="M3 7.5h24M3 10.7h24M3 13.9h24M3 17.1h24M3 20.3h24"/></g></g>'
