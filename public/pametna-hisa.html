@@ -203,9 +203,11 @@ figure{margin:0}
 .shade .slats{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(.2);transition:transform .9s var(--ease)}
 .shade.down .slats{transform:scaleY(1)}
 .sw rect{stroke:var(--ink);stroke-width:1.3;fill:none}
-.sw .btn{fill:rgba(255,255,255,.14)}
-.sw path.edge{stroke:var(--ink);stroke-width:1.9;fill:none;transform:translateY(0);transition:transform .35s var(--ease)}
+.sw .btn{fill:#e5322d;stroke:#e5322d;transition:fill .35s,stroke .35s}
+.sw.on .btn{fill:#22b45a;stroke:#22b45a}
+.sw path.edge{stroke:#9f1f1c;stroke-width:1.9;fill:none;transform:translateY(0);transition:transform .35s var(--ease),stroke .35s}
 .sw.on path.edge{transform:translateY(-11.6px)}
+.sw.on path.edge{stroke:#13783a}
 .nt{fill:var(--ink);font:500 13px var(--font-sans)}
 .ns{fill:var(--muted);font:400 11px var(--font-mono);transition:fill .3s}
 .tap{fill:var(--muted);transition:fill .3s}
