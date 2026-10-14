@@ -153,6 +153,8 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds .pack{transform:scaleY(0);transform-box:fill-box;transform-origin:50% 0}
 .blinds.up .hang{transform:translateY(var(--d));transition:transform 9s cubic-bezier(.45,0,.25,1) var(--t)}
 .blinds.up .pack{transform:scaleY(1);transition:transform 9s cubic-bezier(.45,0,.25,1) var(--t)}
+.blinds.down .hang,.blinds.down .pack{transition:transform 6s cubic-bezier(.45,0,.25,1) var(--t)}
+.blinds.show{opacity:1!important;z-index:1}
 .rise{animation:rise .9s var(--ease) both}
 .d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.32s}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -580,18 +582,23 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   var blinds=document.getElementById('blinds'), blindTimer;
   function raiseBlinds(){
     if(!blinds) return; clearTimeout(blindTimer);
-    blinds.classList.remove('up'); blinds.classList.add('on');
+    blinds.classList.remove('up','down','show'); blinds.classList.add('on');
     void blinds.getBoundingClientRect();
     requestAnimationFrame(function(){blinds.classList.add('up')});
   }
-  function resetBlinds(){
+  /* switching to dark: the shutters lower from the top, then the overlay fades into the night scene */
+  function lowerBlinds(){
     if(!blinds) return; clearTimeout(blindTimer);
-    blindTimer=setTimeout(function(){blinds.classList.remove('up'); blinds.classList.remove('on')},1500);
+    blinds.classList.add('show','down'); blinds.classList.remove('up');
+    blindTimer=setTimeout(function(){
+      blinds.classList.remove('show');
+      blindTimer=setTimeout(function(){blinds.classList.remove('down','on')},1600);
+    },7500);
   }
   document.getElementById('theme').addEventListener('click',function(){
     var next=current()==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
     try{localStorage.setItem(KEY,next);}catch(e){}
-    if(next==='light') raiseBlinds(); else resetBlinds();
+    if(next==='light') raiseBlinds(); else lowerBlinds();
   });
 
   /* copy email */
