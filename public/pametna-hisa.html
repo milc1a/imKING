@@ -397,7 +397,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       <span class="label status rise"><i aria-hidden="true"></i>Pametna hiša · KNX</span>
       <h1 class="rise d1">Pametna inštalacija - KNX</h1>
       <p class="lead rise d2">KNX je vodilni svetovni standard za avtomatizacijo. Razsvetljava, ogrevanje, hlajenje, senčila, varnost in multimedija delujejo v enem sistemu, brez centralne enote.</p>
-      <div class="btns rise d3">
+      <div class="btns">
         <a class="btn" href="#kontakt">Kontakt <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn alt" href="#reference">Reference <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -618,7 +618,16 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var next=current()==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
     try{localStorage.setItem(KEY,next);}catch(e){}
     if(next==='light') raiseBlinds(); else lowerBlinds();
+    slideBtns();
   });
+  /* hero buttons glide in from the right */
+  function slideBtns(){
+    var b=document.querySelector('.hero .btns'); if(!b||!b.animate) return;
+    var r=b.getBoundingClientRect(), dx=Math.max(80,window.innerWidth-r.left+20);
+    if(b._a) b._a.cancel();
+    b._a=b.animate([{transform:'translateX('+dx+'px)',opacity:0},{opacity:1,offset:.25},{transform:'translateX(0)',opacity:1}],{duration:1400,easing:'cubic-bezier(.22,.7,.2,1)',delay:250,fill:'backwards'});
+  }
+  window.addEventListener('load',function(){setTimeout(slideBtns,50)});
 
   /* copy email */
   document.getElementById('copy').addEventListener('click',function(){
