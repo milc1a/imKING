@@ -814,18 +814,18 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   }
 })();
 
-/* Gumba v naslovni sliki: levi rob levega gumba poravnan z žlebom na desni strani hiše (x=1437 v fotografiji 1920x1566) */
+/* Gumba v naslovni sliki: vodoravno na sredini nad dimnikom (x=975 v fotografiji 1920x1566, vrh dimnika 751 px nad spodnjim robom slike) */
 (function(){
   var hero=document.querySelector('.hero'), btns=hero&&hero.querySelector('.btns');
   if(!btns) return;
   function place(){
     var W=hero.clientWidth, H=hero.clientHeight;
-    if(W<=640){ btns.style.left=''; btns.style.right=''; return; }
     var s=Math.max(W/1920,H/1566);
-    var x=1437*s-(1920*s-W)/2;
-    var max=W-btns.offsetWidth-16;
-    btns.style.left=Math.max(16,Math.min(x,max))+'px';
+    var cx=975*s-(1920*s-W)/2;
+    var w=btns.offsetWidth;
+    btns.style.left=Math.max(8,Math.min(cx-w/2,W-w-8))+'px';
     btns.style.right='auto';
+    btns.style.bottom=Math.round(751*s+24)+'px';
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
 })();
