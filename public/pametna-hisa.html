@@ -609,7 +609,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     if(!blinds) return; clearTimeout(blindTimer);
     blinds.classList.add('show','down'); blinds.classList.remove('up');
     /* once the shutters are down, the slats slowly tilt open and the lit interior shows through */
-    blindTimer=setTimeout(function(){ blinds.classList.add('open'); slatTo(2.04,5500); },7200);
+    blindTimer=setTimeout(function(){ blinds.classList.add('open'); slatTo(2.22,5500); },7200);
   }
   document.getElementById('theme').addEventListener('click',function(){
     var next=current()==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
