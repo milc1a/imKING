@@ -203,9 +203,9 @@ figure{margin:0}
 .shade .slats{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(.2);transition:transform .9s var(--ease)}
 .shade.down .slats{transform:scaleY(1)}
 .sw rect{stroke:var(--ink);stroke-width:1.3;fill:none}
-.sw path{stroke:var(--ink);stroke-width:1.1;fill:none}
-.sw .knob{fill:var(--ink);transform:translateY(7.4px);transition:transform .35s var(--ease)}
-.sw.on .knob{transform:translateY(0)}
+.sw .btn{fill:rgba(255,255,255,.14)}
+.sw path.edge{stroke:var(--ink);stroke-width:1.9;fill:none;transform:translateY(0);transition:transform .35s var(--ease)}
+.sw.on path.edge{transform:translateY(-11.6px)}
 .nt{fill:var(--ink);font:500 13px var(--font-sans)}
 .ns{fill:var(--muted);font:400 11px var(--font-mono);transition:fill .3s}
 .tap{fill:var(--muted);transition:fill .3s}
@@ -701,7 +701,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     g.innerHTML='<path class="drop" d="M'+d.x+' '+ty+' V'+(d.top?96:204)+'"/><circle class="tap" cx="'+d.x+'" cy="'+ty+'" r="3"/>'+
       '<rect class="node" x="'+(d.x-w/2)+'" y="'+y+'" width="'+w+'" height="52" rx="8"/>'+
       (k==='sti'
-        ? '<g class="sw" transform="translate('+(d.x-11)+' '+(y+6)+')" aria-label="Stikalo"><rect class="plate" x="0.65" y="0.65" width="20.7" height="20.7" rx="3"/><rect class="well" x="3.6" y="3.6" width="14.8" height="14.8" rx="1.6"/><path class="mid" d="M3.6 11h14.8"/><rect class="knob" x="3.6" y="3.6" width="14.8" height="7.4" rx="1.6"/></g>'
+        ? '<g class="sw" transform="translate('+(d.x-11)+' '+(y+6)+')" aria-label="Stikalo"><rect class="plate" x="0.65" y="0.65" width="20.7" height="20.7" rx="3.5"/><rect class="well" x="3.4" y="3.4" width="15.2" height="15.2" rx="2"/><rect class="btn" x="5.6" y="5.6" width="10.8" height="10.8" rx="1.2"/><path class="edge" d="M6.2 16.9h9.6"/></g>'
         : k==='sen'
         ? '<g class="shade" transform="translate('+(d.x-15)+' '+(y+6)+')" aria-label="Senčila"><rect class="fr" x="0.65" y="0.65" width="28.7" height="22.7" rx="2"/><path d="M0.65 4h28.7"/><g class="slats"><path d="M3 7.5h24M3 10.7h24M3 13.9h24M3 17.1h24M3 20.3h24"/></g></g>'
         : k==='ogr'
