@@ -62,9 +62,8 @@ header.over .toggle{color:var(--hero-ink);border-color:var(--hero-line)}
 .logo i{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 0 var(--glow);animation:beat 2.4s var(--ease) infinite}
 @keyframes beat{0%{box-shadow:0 0 0 0 var(--glow)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .right{display:flex;align-items:center;gap:var(--space-6)}
-header .bar{max-width:none;padding-left:24px}
-@media (min-width:1128px){header .bar .right{margin-right:calc((100vw - 1080px)/2)}}
-@media (max-width:480px){header .bar{padding-left:16px}}
+header .bar{max-width:none;padding-inline:24px}
+@media (max-width:480px){header .bar{padding-inline:16px}}
 nav ul{display:flex;gap:var(--space-6);flex-wrap:wrap}
 nav a{position:relative;color:var(--muted);text-decoration:none;font-size:15px;transition:color .2s}
 nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
