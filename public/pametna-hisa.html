@@ -276,9 +276,14 @@ figure{margin:0}
 .has-gal{cursor:pointer}
 .has-gal strong{transition:color .2s}
 .has-gal:hover strong,.has-gal:focus-visible strong{color:var(--primary)}
-.gal-hint{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-style:normal;font-size:14px;line-height:20px;color:var(--primary)}
+.gal-hint{display:flex;width:fit-content;align-items:center;gap:6px;margin-top:6px;font-style:normal;font-size:14px;line-height:20px;color:var(--primary)}
 .gal-hint svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease)}
 .has-gal:hover .gal-hint svg{transform:translateX(4px)}
+@media (hover:hover){
+.gal-prev{display:flex;gap:6px;max-height:0;opacity:0;overflow:hidden;margin-top:0;pointer-events:none;transition:max-height .55s var(--ease),opacity .45s ease,margin-top .45s ease}
+.has-gal:hover .gal-prev,.has-gal:focus-visible .gal-prev{max-height:96px;opacity:.9;margin-top:12px}
+.gal-prev img{flex:1 1 0;min-width:0;height:88px;object-fit:cover;border-radius:6px;filter:blur(2.5px) saturate(.9);transform:scale(1.02)}
+}
 .gal{position:fixed;inset:0;z-index:100;background:var(--bg);overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
 .gal.open{opacity:1;visibility:visible}
 .gal-bar{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:14px 24px;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -859,6 +864,15 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     g.querySelector('.gal-close').addEventListener('click',function(){close(false)});
     g.querySelector('[data-galclose]').addEventListener('click',function(e){e.preventDefault();close(false);window.scrollTo({top:0,behavior:'smooth'});});
     g.querySelectorAll('figure').forEach(function(f){ f.addEventListener('click',function(){ zi.src=f.querySelector('img').src; z.classList.add('open'); }); });
+  });
+
+  /* hover preview: slightly blurred strip of the gallery under the step title */
+  document.querySelectorAll('[data-gal]').forEach(function(o){
+    var g=document.getElementById(o.getAttribute('data-gal')); if(!g) return;
+    var box=document.createElement('div'); box.className='gal-prev'; box.setAttribute('aria-hidden','true');
+    var imgs=g.querySelectorAll('figure img'), n=Math.min(5,imgs.length);
+    for(var i=0;i<n;i++){ var im=document.createElement('img'); im.alt=''; im.decoding='async'; im.src=imgs[Math.floor(i*imgs.length/n)].src; box.appendChild(im); }
+    o.querySelector('div').appendChild(box);
   });
   z.addEventListener('click',function(){ z.classList.remove('open'); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ if(z.classList.contains('open')) z.classList.remove('open'); else close(false); } });
