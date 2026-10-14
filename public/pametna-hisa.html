@@ -207,7 +207,10 @@ figure{margin:0}
 .sw.on .btn{fill:#22b45a;stroke:#22b45a}
 .sw .st{font:600 9px/1 var(--font-mono,ui-monospace,monospace);fill:#e5322d;stroke:none;transition:fill .35s}
 .sw.on .st{fill:#22b45a}
-.dev.rx .alarm .aw,.dev.tx .alarm .aw{animation:alw .5s ease-in-out infinite alternate}
+.alarm .pl{fill:transparent;stroke:#fff;stroke-width:1.2;transition:fill .4s,stroke .4s}
+.alarm.on .pl{fill:#cc0000;stroke:#cc0000}
+.alarm .aw{opacity:0;transition:opacity .4s}
+.alarm.on .aw{opacity:1;animation:alw .5s ease-in-out infinite alternate}
 @keyframes alw{from{opacity:1}to{opacity:.25}}
 .sw path.edge{stroke:#9f1f1c;stroke-width:1.9;fill:none;transform:translateY(0);transition:transform .35s var(--ease),stroke .35s}
 .sw.on path.edge{transform:translateY(-11.6px)}
@@ -707,7 +710,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     g.innerHTML='<path class="drop" d="M'+d.x+' '+ty+' V'+(d.top?96:204)+'"/><circle class="tap" cx="'+d.x+'" cy="'+ty+'" r="3"/>'+
       '<rect class="node" x="'+(d.x-w/2)+'" y="'+y+'" width="'+w+'" height="52" rx="8"/>'+
       (k==='alm'
-        ? '<g class="alarm" transform="translate('+(d.x-33)+' '+(y+4)+')" aria-label="Alarm"><rect x="0" y="0" width="28" height="28" rx="6.5" fill="#cc0000"/><rect x="2.6" y="2.6" width="22.8" height="22.8" rx="4.2" fill="none" stroke="#fff" stroke-width="1"/><path fill="#fff" d="M14 5.4a1.1 1.1 0 0 1 1.1 1.1c2.5.7 3.6 2.7 3.6 5.2v3.7l1.8 2.2H7.5l1.8-2.2v-3.7c0-2.5 1.1-4.5 3.6-5.2A1.1 1.1 0 0 1 14 5.4z"/><path fill="#fff" d="M12.2 19.6a1.8 1.2 0 0 0 3.6 0z"/><g class="aw" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round"><path d="M6.6 9.8q-1.4 2.8 0 5.6M4.8 8.8q-1.6 3.6 0 7.2M21.4 9.8q1.4 2.8 0 5.6M23.2 8.8q1.6 3.6 0 7.2"/></g><text x="33" y="19" fill="#fff" style="font:700 9.5px var(--font-sans,Inter,sans-serif);letter-spacing:.6px">ALARM</text></g>'
+        ? '<g class="alarm" transform="translate('+(d.x-33)+' '+(y+4)+')" aria-label="Alarm"><rect class="pl" x="0.6" y="0.6" width="26.8" height="26.8" rx="6.2"/><rect x="2.6" y="2.6" width="22.8" height="22.8" rx="4.2" fill="none" stroke="#fff" stroke-width="1"/><path fill="#fff" d="M14 5.4a1.1 1.1 0 0 1 1.1 1.1c2.5.7 3.6 2.7 3.6 5.2v3.7l1.8 2.2H7.5l1.8-2.2v-3.7c0-2.5 1.1-4.5 3.6-5.2A1.1 1.1 0 0 1 14 5.4z"/><path fill="#fff" d="M12.2 19.6a1.8 1.2 0 0 0 3.6 0z"/><g class="aw" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round"><path d="M6.6 9.8q-1.4 2.8 0 5.6M4.8 8.8q-1.6 3.6 0 7.2M21.4 9.8q1.4 2.8 0 5.6M23.2 8.8q1.6 3.6 0 7.2"/></g><text x="33" y="19" fill="#fff" style="font:700 9.5px var(--font-sans,Inter,sans-serif);letter-spacing:.6px">ALARM</text></g>'
         : k==='sti'
         ? '<g class="sw" transform="translate('+(d.x-11)+' '+(y+6)+')" aria-label="Stikalo"><rect class="plate" x="0.65" y="0.65" width="20.7" height="20.7" rx="3.5"/><rect class="well" x="3.4" y="3.4" width="15.2" height="15.2" rx="2"/><rect class="btn" x="5.6" y="5.6" width="10.8" height="10.8" rx="1.2"/><path class="edge" d="M6.2 16.9h9.6"/><text class="st" x="27" y="15" >OFF</text></g>'
         : k==='sen'
@@ -725,10 +728,10 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     {f:'sti',t:'luci',ga:'1/1/1',txt:'Luči · dnevna soba',v:'VKLOP',room:'Dnevna soba'},
     {f:'ogr',t:'srv',ga:'3/1/2',txt:'Temperatura · dnevna',v:'21,5 °C',room:'Ogrevanje'},
     {f:'srv',t:'sen',ga:'2/1/0',txt:'Senčila · jug',v:'DOL 80 %',room:'Senčila',shade:true},
-    {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'ZAZNANO',room:'Alarm'},
+    {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'ZAZNANO',room:'Alarm',alarm:true},
     {f:'sti',t:'luci',ga:'1/1/1',txt:'Luči · dnevna soba',v:'IZKLOP',room:'Dnevna soba'},
     {f:'srv',t:'ogr',ga:'3/1/0',txt:'Ogrevanje · nastavitev',v:'22,0 °C',room:'Ogrevanje',heat:true},
-    {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'NI ZAZNANO',room:'Alarm'},
+    {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'NI ZAZNANO',room:'Alarm',alarm:false},
     {f:'srv',t:'ogr',ga:'3/1/0',txt:'Ogrevanje · nastavitev',v:'IZKLOP',room:'Ogrevanje',heat:false},
     {f:'sti',t:'sen',ga:'2/1/0',txt:'Senčila · jug',v:'GOR',room:'Senčila',shade:false}
   ];
@@ -775,6 +778,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       if(e.t==='luci'){var bl=D.luci.g.querySelector('.bulb'); if(bl) bl.classList.toggle('lit',e.v==='VKLOP');}
       if(e.t==='ogr'&&e.heat!==undefined){var ht=D.ogr.g.querySelector('.heater'); if(ht) ht.classList.toggle('on',e.heat);}
       if(e.t==='sen'&&e.shade!==undefined){var sh=D.sen.g.querySelector('.shade'); if(sh) sh.classList.toggle('down',e.shade);}
+      if(e.alarm!==undefined){var al=D.alm.g.querySelector('.alarm'); if(al) al.classList.toggle('on',e.alarm);}
       addLog(e); room(e.room);
       setTimeout(function(){b.g.classList.remove('rx'); b.ns.textContent=b.sub;},1400);
       setTimeout(run,1700);
