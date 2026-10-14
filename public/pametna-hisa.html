@@ -195,6 +195,10 @@ figure{margin:0}
 .node{fill:var(--node);stroke:var(--line);stroke-width:1;transition:stroke .3s,fill .3s}
 .bulb path{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:fill .5s,stroke .5s}
 .bulb.lit path:first-child{fill:#ffd43b}
+.heater rect,.heater path{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:fill .5s,stroke .5s}
+.heater .waves path{stroke:#e5322d;opacity:0;transition:opacity .5s}
+.heater.on rect:not(:first-of-type){fill:#e5322d}
+.heater.on .waves path{opacity:1}
 .nt{fill:var(--ink);font:500 13px var(--font-sans)}
 .ns{fill:var(--muted);font:400 11px var(--font-mono);transition:fill .3s}
 .tap{fill:var(--muted);transition:fill .3s}
@@ -689,7 +693,9 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var ty=d.top?145:155;
     g.innerHTML='<path class="drop" d="M'+d.x+' '+ty+' V'+(d.top?96:204)+'"/><circle class="tap" cx="'+d.x+'" cy="'+ty+'" r="3"/>'+
       '<rect class="node" x="'+(d.x-w/2)+'" y="'+y+'" width="'+w+'" height="52" rx="8"/>'+
-      (k==='luci'
+      (k==='ogr'
+        ? '<g class="heater" transform="translate('+(d.x-17)+' '+(y+6)+')" aria-label="Ogrevanje"><g class="waves"><path d="M12 5.5q-1.4-1.3 0-2.6t0-2.6"/><path d="M18 5.5q-1.4-1.3 0-2.6t0-2.6"/><path d="M24 5.5q-1.4-1.3 0-2.6t0-2.6"/></g><rect x="1" y="9" width="4" height="4" rx="1"/><path d="M3 13v6h4"/><rect x="7" y="7.5" width="5" height="14" rx="2.5"/><rect x="12.4" y="7.5" width="5" height="14" rx="2.5"/><rect x="17.8" y="7.5" width="5" height="14" rx="2.5"/><rect x="23.2" y="7.5" width="5" height="14" rx="2.5"/><rect x="28.6" y="7.5" width="5" height="14" rx="2.5"/><path d="M10 21.5v2M31 21.5v2"/></g>'
+        : k==='luci'
         ? '<g class="bulb" transform="translate('+(d.x-11)+' '+(y+5)+') scale(.92)" aria-label="Luči"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></g>'
         : '<text class="nt" x="'+d.x+'" y="'+(y+23)+'" text-anchor="middle">'+d.name+'</text>')+
       '<text class="ns" x="'+d.x+'" y="'+(y+40)+'" text-anchor="middle">'+d.sub+'</text>';
@@ -702,7 +708,9 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     {f:'srv',t:'sen',ga:'2/1/0',txt:'Senčila · jug',v:'DOL 80 %',room:'Senčila'},
     {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'ZAZNANO',room:'Alarm'},
     {f:'sti',t:'luci',ga:'1/1/1',txt:'Luči · dnevna soba',v:'IZKLOP',room:'Dnevna soba'},
-    {f:'srv',t:'ogr',ga:'3/1/0',txt:'Ogrevanje · nastavitev',v:'22,0 °C',room:'Ogrevanje'}
+    {f:'srv',t:'ogr',ga:'3/1/0',txt:'Ogrevanje · nastavitev',v:'22,0 °C',room:'Ogrevanje',heat:true},
+    {f:'alm',t:'srv',ga:'4/0/1',txt:'Prisotnost · predprostor',v:'NI ZAZNANO',room:'Alarm'},
+    {f:'srv',t:'ogr',ga:'3/1/0',txt:'Ogrevanje · nastavitev',v:'IZKLOP',room:'Ogrevanje',heat:false}
   ];
   var pulse=document.getElementById('pulse'), halo=document.getElementById('halo'), trail=document.getElementById('trail');
   var log=document.getElementById('log'), roomsEl=[].slice.call(document.querySelectorAll('#rooms li'));
@@ -744,6 +752,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       a.g.classList.remove('tx'); a.ns.textContent=a.sub;
       b.g.classList.add('rx'); b.ns.textContent=e.v.toLowerCase();
       if(e.t==='luci'){var bl=D.luci.g.querySelector('.bulb'); if(bl) bl.classList.toggle('lit',e.v==='VKLOP');}
+      if(e.t==='ogr'&&e.heat!==undefined){var ht=D.ogr.g.querySelector('.heater'); if(ht) ht.classList.toggle('on',e.heat);}
       addLog(e); room(e.room);
       setTimeout(function(){b.g.classList.remove('rx'); b.ns.textContent=b.sub;},1400);
       setTimeout(run,1700);
