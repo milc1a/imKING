@@ -282,6 +282,8 @@ figure{margin:0}
 .facts div:last-child{border-bottom:1px solid var(--line)}
 .facts dt{color:var(--muted)}
 .facts dd{margin:0;text-align:right}
+.facts a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px;transition:color .2s}
+.facts a:hover{color:var(--primary)}
 .steps{counter-reset:s;position:relative}
 .steps li{position:relative;display:grid;grid-template-columns:48px 1fr;gap:var(--space-4);padding-bottom:var(--space-12)}
 .steps li:last-child{padding-bottom:0}
@@ -491,7 +493,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
         <dl class="facts">
           <div><dt>Lokacija</dt><dd>Črešnjevci (Gornja Radgona)</dd></div>
           <div><dt>Objekt</dt><dd>Novogradnja (Atrijska hiša)</dd></div>
-          <div><dt>Upravljanje</dt><dd>ComfortClick Home Server</dd></div>
+          <div><dt>Upravljanje</dt><dd><a href="https://www.comfortclick.com/" target="_blank" rel="noopener">ComfortClick Home Server</a></dd></div>
           <div><dt>Zaključeno</dt><dd>2023</dd></div>
         </dl>
       </div>
