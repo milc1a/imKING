@@ -126,10 +126,13 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 @keyframes lightsOn{to{opacity:0}}
 .extwrap{pointer-events:none}
 .extdark{pointer-events:none}
-.extdark g{fill:#9b8d79;opacity:0;transition:opacity .9s var(--ease)}
-.ext-off .extdark g{opacity:.92}
+.extdark .sp{opacity:0;transition:opacity .55s ease-in var(--d)}
+.ext-off .extdark .sp{opacity:1;transition:opacity .9s cubic-bezier(.3,0,.2,1) var(--d)}
 .ext-off .glow.ext{animation:none;opacity:0}
 .glow.ext{transition:opacity .9s var(--ease)}
+.ext-touched .glow.ext{animation:sparkOn 1.5s ease-out both;animation-delay:0s!important}
+.ext-off .glow.ext,.ext-off.ext-touched .glow.ext{animation:none!important;opacity:0}
+@keyframes sparkOn{0%{opacity:0}10%{opacity:.75}18%{opacity:.12}30%{opacity:.8}42%{opacity:.3}58%{opacity:.72}100%{opacity:.22}}
 #extHit{pointer-events:none}
 #extHit *{pointer-events:all;fill:transparent;cursor:pointer}
 html[data-theme="light"] #extHit *{pointer-events:none}
@@ -387,7 +390,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       <canvas id="stars" class="night-only"></canvas>
       <div class="orb orb-sun day-only"></div>
       <div class="orb orb-moon night-only"></div>
-      <div class="layer night-only extwrap"><svg class="extdark" viewBox="0 0 1920 1566" preserveAspectRatio="xMidYMax slice"><defs><filter id="extblur" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="2"/></filter></defs><g filter="url(#extblur)"><ellipse cx="917" cy="979" rx="10" ry="8"/><ellipse cx="991" cy="973" rx="10" ry="8"/><ellipse cx="1049" cy="969" rx="10" ry="8"/></g></svg></div>
+      <div class="layer night-only extwrap"><svg class="extdark" viewBox="0 0 1920 1566" preserveAspectRatio="xMidYMax slice"><defs><radialGradient id="spOff"><stop offset="0" stop-color="#8d8070" stop-opacity=".95"/><stop offset=".5" stop-color="#8d8070" stop-opacity=".7"/><stop offset="1" stop-color="#8d8070" stop-opacity="0"/></radialGradient><radialGradient id="spCone"><stop offset="0" stop-color="#02050b" stop-opacity=".5"/><stop offset=".6" stop-color="#02050b" stop-opacity=".22"/><stop offset="1" stop-color="#02050b" stop-opacity="0"/></radialGradient></defs><g class="sp" style="--d:0s"><ellipse cx="917" cy="1009" rx="46" ry="42" fill="url(#spCone)"/><ellipse cx="917" cy="979" rx="17" ry="13" fill="url(#spOff)"/></g><g class="sp" style="--d:0.12s"><ellipse cx="991" cy="1003" rx="46" ry="42" fill="url(#spCone)"/><ellipse cx="991" cy="973" rx="17" ry="13" fill="url(#spOff)"/></g><g class="sp" style="--d:0.24s"><ellipse cx="1049" cy="999" rx="46" ry="42" fill="url(#spCone)"/><ellipse cx="1049" cy="969" rx="17" ry="13" fill="url(#spOff)"/></g></svg></div>
       <svg id="extHit" viewBox="0 0 1920 1566" preserveAspectRatio="xMidYMax slice"><title>Klik: vklop / izklop stropnih luči</title><ellipse cx="917" cy="979" rx="30" ry="26"/><ellipse cx="991" cy="973" rx="30" ry="26"/><ellipse cx="1049" cy="969" rx="30" ry="26"/></svg>
     </div>
     <div class="wrap hero-copy">
@@ -815,7 +818,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   hero.addEventListener('mousemove',function(e){ scene.style.cursor=(e.target===hero||e.target===scene||scene.contains(e.target))&&onLight(e.clientX,e.clientY)?'pointer':''; });
   hero.addEventListener('click',function(e){
     if(!(e.target===hero||scene.contains(e.target))) return;
-    if(onLight(e.clientX,e.clientY)){ off=!off; scene.classList.toggle('ext-off',off); }
+    if(onLight(e.clientX,e.clientY)){ off=!off; scene.classList.add('ext-touched'); scene.classList.toggle('ext-off',off); }
   });
 })();
 </script>
