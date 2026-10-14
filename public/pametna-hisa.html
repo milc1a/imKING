@@ -101,7 +101,8 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 /* hero: the house by day (light theme) or by night (dark theme); the scene crossfades on theme change */
 .hero{position:relative;margin-top:-72px;min-height:clamp(760px,78vw,1180px);background:var(--hero-bg);color:var(--hero-ink);overflow:hidden;isolation:isolate;transition:background-color 1.2s}
 @media (max-width:640px){.hero{min-height:940px}}
-.scene{position:absolute;inset:0;z-index:-1;animation:settle 14s var(--ease) both}
+.scene{--lift:32px;position:absolute;inset:calc(-1*var(--lift)) 0 var(--lift) 0;z-index:-1;animation:settle 14s var(--ease) both}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:var(--hero-fade);z-index:-1;pointer-events:none}
 @keyframes settle{from{transform:scale(1.07)}to{transform:none}}
 .scene img,.scene svg,.scene canvas,.layer{position:absolute;inset:0;width:100%;height:100%}
 .scene img{object-fit:cover;object-position:50% 100%}
@@ -625,7 +626,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       if(current()!=='dark') return false;
       if(e.target.closest&&e.target.closest('a,button,.chip,.toggle,header')) return false;
       var r=hero.getBoundingClientRect(), W=r.width, H=r.height, s=Math.max(W/1920,H/1566);
-      var x=((e.clientX-r.left)+(1920*s-W)/2)/s, y=((e.clientY-r.top)+(1566*s-H))/s;
+      var x=((e.clientX-r.left)+(1920*s-W)/2)/s, y=((e.clientY-r.top)+(1566*s-H)+32)/s;
       for(var i=0;i<boxes.length;i++){var b=boxes[i]; if(x>=b[0]-6&&x<=b[2]+6&&y>=b[1]-6&&y<=b[3]+6) return true;}
       return false;
     }
@@ -814,7 +815,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var w=btns.offsetWidth;
     btns.style.left=Math.max(8,Math.min(cx-w/2,W-w-8))+'px';
     btns.style.right='auto';
-    btns.style.bottom=Math.round(751*s+46)+'px';
+    btns.style.bottom=Math.round(751*s+46+32)+'px';
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
 })();
