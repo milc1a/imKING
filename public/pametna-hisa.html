@@ -202,6 +202,7 @@ figure{margin:0}
 .shade .fr,.shade path{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
 .shade .slats{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(.2);transition:transform .9s var(--ease)}
 .shade.down .slats{transform:scaleY(1)}
+.shade .sl{font:700 8.8px var(--font-sans,Inter,sans-serif);letter-spacing:.5px;fill:var(--ink);stroke:none}
 .sw rect{stroke:var(--ink);stroke-width:1.3;fill:none}
 .sw .btn{fill:#e5322d;stroke:#e5322d;transition:fill .35s,stroke .35s}
 .sw.on .btn{fill:#22b45a;stroke:#22b45a}
@@ -714,7 +715,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
         : k==='sti'
         ? '<g class="sw" transform="translate('+(d.x-11)+' '+(y+6)+')" aria-label="Stikalo"><rect class="plate" x="0.65" y="0.65" width="20.7" height="20.7" rx="3.5"/><rect class="well" x="3.4" y="3.4" width="15.2" height="15.2" rx="2"/><rect class="btn" x="5.6" y="5.6" width="10.8" height="10.8" rx="1.2"/><path class="edge" d="M6.2 16.9h9.6"/><text class="st" x="27" y="15" >OFF</text></g>'
         : k==='sen'
-        ? '<g class="shade" transform="translate('+(d.x-15)+' '+(y+6)+')" aria-label="Senčila"><rect class="fr" x="0.65" y="0.65" width="28.7" height="22.7" rx="2"/><path d="M0.65 4h28.7"/><g class="slats"><path d="M3 7.5h24M3 10.7h24M3 13.9h24M3 17.1h24M3 20.3h24"/></g></g>'
+        ? '<g class="shade" transform="translate('+(d.x-39)+' '+(y+6)+')" aria-label="Senčila"><rect class="fr" x="0.65" y="0.65" width="28.7" height="22.7" rx="2"/><path d="M0.65 4h28.7"/><g class="slats"><path d="M3 7.5h24M3 10.7h24M3 13.9h24M3 17.1h24M3 20.3h24"/></g><text class="sl" x="35" y="16" >SENČILO</text></g>'
         : k==='ogr'
         ? '<g class="heater" transform="translate('+(d.x-17)+' '+(y+6)+')" aria-label="Ogrevanje"><g class="waves"><path d="M12 5.5q-1.4-1.3 0-2.6t0-2.6"/><path d="M18 5.5q-1.4-1.3 0-2.6t0-2.6"/><path d="M24 5.5q-1.4-1.3 0-2.6t0-2.6"/></g><rect x="1" y="9" width="4" height="4" rx="1"/><path d="M3 13v6h4"/><rect x="7" y="7.5" width="5" height="14" rx="2.5"/><rect x="12.4" y="7.5" width="5" height="14" rx="2.5"/><rect x="17.8" y="7.5" width="5" height="14" rx="2.5"/><rect x="23.2" y="7.5" width="5" height="14" rx="2.5"/><rect x="28.6" y="7.5" width="5" height="14" rx="2.5"/><path d="M10 21.5v2M31 21.5v2"/></g>'
         : k==='luci'
