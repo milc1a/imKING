@@ -453,11 +453,16 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   .draw{stroke-dashoffset:0}
 }
 :root[data-theme="dark"] .blinds.ioff .nd,:root[data-theme="dark"] .blinds.ioff .lit{opacity:0}
-:root[data-theme="dark"] .blinds.ioff g[filter="url(#blurI)"]{filter:url(#blurI);opacity:.22}
-:root[data-theme="dark"] .blinds.ioff g[filter="url(#blurX)"]{filter:url(#blurX)}
+:root[data-theme="dark"] .blinds.ioff g[filter="url(#blurI)"]{filter:brightness(1);opacity:.22}
+:root[data-theme="dark"] .blinds.ioff g[filter="url(#blurX)"]{filter:contrast(1.26) saturate(1)}
 :root[data-theme="dark"] .blinds.ioff rect[fill="url(#vig)"],:root[data-theme="dark"] .blinds.ioff rect[fill="url(#hill)"]{opacity:1}
 :root[data-theme="dark"] .blinds.ioff .gt{opacity:.3}
-:root[data-theme="dark"] .blinds.ioff .gbk{display:block}
+:root[data-theme="dark"] .blinds .gbk{display:block;opacity:0;transition:opacity 1s ease}
+:root[data-theme="dark"] .blinds.ioff .gbk{opacity:1}
+:root[data-theme="dark"] .blinds .gbk[fill="#3a434c"]{opacity:1;transition:none}
+:root[data-theme="dark"] .blinds .gt,:root[data-theme="dark"] .blinds rect[fill="url(#vig)"],:root[data-theme="dark"] .blinds rect[fill="url(#hill)"],:root[data-theme="dark"] .blinds g[filter="url(#blurS)"],:root[data-theme="dark"] .blinds rect[fill="url(#refl)"]{transition:opacity 1s ease}
+:root[data-theme="dark"] .blinds g[filter="url(#blurI)"],:root[data-theme="dark"] .blinds g[filter="url(#blurX)"]{transition:opacity 1s ease,filter 1s ease}
+
 </style>
 
 <header id="top">
