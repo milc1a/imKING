@@ -200,6 +200,8 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds.gdark #glasswm{opacity:.2;mix-blend-mode:screen;transition:opacity 1.2s ease}
 .blinds.gdark.ioff #glassdk{opacity:0}
 .blinds.nightup.ioff .lit{opacity:0}
+.blinds.nightlow.ioff .lit{opacity:0}
+.blinds.nightlow.ioff .nd{opacity:1;transition:opacity .9s ease}
 .blinds.nightup.ioff .nd{opacity:.45;transition:opacity 1.5s ease}
 .blinds.nightup.ioff .hang>rect:first-child{opacity:0}
 .blinds.gdark.ioff #glasswm{opacity:0}
@@ -770,6 +772,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     if(!blinds) return; clearTimeout(blindTimer);
     shadeUI(false);
     blinds.classList.toggle('nightup',current()==='dark');
+    blinds.classList.remove('nightlow');
     clearTimeout(gdTimer); if(current()==='dark') gdTimer=setTimeout(function(){blinds.classList.add('gdark')},4500); else blinds.classList.remove('gdark');
     blinds.classList.remove('up','down','show','open'); blinds.classList.add('on');
     slatTo(HC,700); blindsTo(1,9000);
@@ -784,6 +787,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   }
   function lowerBlinds(){
     if(!blinds) return; clearTimeout(blindTimer); shadeUI(true);
+    blinds.classList.toggle('nightlow',current()==='dark');
     blinds.classList.remove('nightup');
     clearTimeout(gdTimer); blinds.classList.remove('gdark');
     blinds.classList.add('show','down'); blinds.classList.remove('up'); slatTo(HC,500); blindsTo(0,6000);
