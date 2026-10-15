@@ -982,7 +982,12 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     btns.style.top=Math.round(pB+GAP1)+'px';
     var ls=document.getElementById('lightsw');
     if(ls){ var ly=1215*s-(1566*s-H)-LIFT; ls.style.top=Math.round(ly)+'px'; ls.style.bottom='auto';
-      var l2=document.getElementById('lightsw2'); if(l2){ l2.style.top=Math.round(ly+ls.offsetHeight+10)+'px'; l2.style.bottom='auto'; } }
+      var l2=document.getElementById('lightsw2'); if(l2){ l2.style.top=Math.round(ly+ls.offsetHeight+10)+'px'; l2.style.bottom='auto'; }
+      /* začetek gumbov poravnan z levim robom povezave KNX v meniju (če je v meniju viden) */
+      var kn=document.querySelector('#top nav a[href="#kako"]'), hr=hero.getBoundingClientRect();
+      [ls,l2].forEach(function(el){ if(!el) return;
+        if(kn&&kn.offsetParent!==null){ var kr=kn.getBoundingClientRect(); el.style.left=Math.round(kr.left-hr.left)+'px'; el.style.right='auto'; }
+        else { el.style.left=''; el.style.right=''; } }); }
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
   if(window.ResizeObserver) new ResizeObserver(place).observe(lead);
