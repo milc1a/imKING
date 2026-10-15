@@ -195,8 +195,11 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 /* blinds: an overlay of the day photo's shutters; clicking the sun lifts them halfway */
 .blinds{pointer-events:none}
 .blinds .pack{display:none}
-#glassdk{opacity:0;transition:opacity .6s ease}
-.blinds.gdark #glassdk{opacity:.62;transition:opacity 3s ease 4.5s}
+#glassdk,#glasswm{opacity:0;transition:opacity .8s ease}
+.blinds.gdark #glassdk{opacity:.4;transition:opacity 1.2s ease}
+.blinds.gdark #glasswm{opacity:.2;mix-blend-mode:screen;transition:opacity 1.2s ease}
+.blinds.gdark.ioff #glassdk{opacity:.9}
+.blinds.gdark.ioff #glasswm{opacity:0}
 .blinds.show{opacity:1!important;z-index:1}
 .blinds .gbk{display:none}
 :root[data-theme="light"] .blinds .gbk{display:block}
@@ -467,7 +470,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
         <g clip-path="url(#c_s2)" class="bw" style="--d:-81.2px;--t:.7s"><g transform="translate(870 986.6)"><rect class="gbk" width="36" height="110" fill="#3a434c"/><g transform="scale(1.05882 1.06154)" filter="url(#blurI)"><g filter="url(#blurX)"><use href="#r3" transform="translate(-61.6 0) scale(1.0400)"/></g></g><rect width="36" height="110" fill="#0a1019" opacity=".3"/><rect class="nd" width="36" height="110" fill="#050a14"/><rect class="lit" width="36" height="110" fill="url(#litg)"/><rect width="36" height="110" fill="url(#refl)"/><rect class="gbk" width="36" height="110" fill="url(#refl)"/><g filter="url(#blurS)" opacity=".9"><polygon points="4.32,0 12.24,0 -4.32,110.4 -12.24,110.4" fill="#fff" opacity=".10"/><polygon points="18,0 20.88,0 4.32,110.4 1.44,110.4" fill="#fff" opacity=".06"/></g><rect width="36" height="110" fill="url(#hill)"/><rect width="36" height="110" fill="url(#vig)"/><rect width="36" height="110" filter="url(#grain)" opacity=".045"/><rect width="3" height="110" fill="url(#edgeL)"/><rect y="107" width="36" height="3" fill="url(#edgeB)"/></g><g transform="matrix(1 0.237 0 1 870 989.6)"><g class="hang"><rect x="-1" y="0" width="38" height="106.4" fill="#000" opacity=".92"/><rect x="-1" y="0" width="38" height="103" fill="url(#lam)"/><rect x="-1" y="103" width="38" height="3.4" fill="url(#rail)"/><rect x="-1" y="103" width="38" height=".7" fill="#6c7076" opacity=".8"/><rect x="-1" y="106.4" width="38" height="20" fill="url(#fall)"/></g><g class="pack"><rect x="-1" y="0" width="38" height="13" fill="url(#packp)"/><rect x="-1" y="11.9" width="38" height="1.1" fill="#0b0c0d"/><rect x="-1" y="13" width="38" height="6" fill="url(#fall)"/></g><rect x="-1" y="0" width="38" height="6" fill="url(#edgeT)"/></g></g>
         <g clip-path="url(#c_w3)" class="bw" style="--d:-103.2px;--t:1s"><g transform="translate(1257.8 962.269)"><rect class="gbk" width="126" height="133" fill="#3a434c"/><g transform="scale(1.01935 1.07847)" filter="url(#blurI)"><g filter="url(#blurX)"><use href="#r4" transform="translate(-0.0 0) scale(1.2400)"/></g></g><rect width="126" height="133" fill="#0a1019" opacity=".3"/><rect class="nd" width="126" height="133" fill="#050a14"/><rect class="lit" width="126" height="133" fill="url(#litg)"/><rect width="126" height="133" fill="url(#refl)"/><rect class="gbk" width="126" height="133" fill="url(#refl)"/><g filter="url(#blurS)" opacity=".9"><polygon points="15.168,0 42.976,0 -15.168,133.731 -42.976,133.731" fill="#fff" opacity=".10"/><polygon points="63.2,0 73.312,0 15.168,133.731 5.056,133.731" fill="#fff" opacity=".06"/></g><rect width="126" height="133" fill="url(#hill)"/><rect width="126" height="133" fill="url(#vig)"/><rect width="126" height="133" filter="url(#grain)" opacity=".045"/><rect width="3" height="133" fill="url(#edgeL)"/><rect y="130" width="126" height="3" fill="url(#edgeB)"/></g><g transform="matrix(1 -0.0754 0 1 1257.8 974.8)"><g class="hang"><rect x="-1" y="0" width="128.4" height="134.731" fill="#000" opacity=".92"/><rect x="-1" y="0" width="128.4" height="131.331" fill="url(#lam)"/><rect x="-1" y="131.331" width="128.4" height="3.4" fill="url(#rail)"/><rect x="-1" y="131.331" width="128.4" height=".7" fill="#6c7076" opacity=".8"/><rect x="-1" y="134.731" width="128.4" height="20" fill="url(#fall)"/></g><g class="pack"><rect x="-1" y="0" width="128.4" height="16.5" fill="url(#packp)"/><rect x="-1" y="15.4" width="128.4" height="1.1" fill="#0b0c0d"/><rect x="-1" y="16.5" width="128.4" height="6" fill="url(#fall)"/></g><rect x="-1" y="0" width="128.4" height="6" fill="url(#edgeT)"/></g><rect x="1332.3" y="962.269" width="2.6" height="133.731" fill="#0b0d11"/><rect x="1332.3" y="962.269" width=".7" height="133.731" fill="#4a4f58" opacity=".7"/></g>
         <g clip-path="url(#c_s3)" class="bw" style="--d:-105.9px;--t:1s"><g transform="translate(1398.5 962.9)"><rect class="gbk" width="22" height="135" fill="#3a434c"/><g transform="scale(1.15789 1.13)" filter="url(#blurI)"><g filter="url(#blurX)"><use href="#r5" transform="translate(-90.9 0) scale(1.2000)"/></g></g><rect width="22" height="135" fill="#0a1019" opacity=".3"/><rect class="nd" width="22" height="135" fill="#050a14"/><rect class="lit" width="22" height="135" fill="url(#litg)"/><rect width="22" height="135" fill="url(#refl)"/><rect class="gbk" width="22" height="135" fill="url(#refl)"/><g filter="url(#blurS)" opacity=".9"><polygon points="2.64,0 7.48,0 -2.64,135.6 -7.48,135.6" fill="#fff" opacity=".10"/><polygon points="11,0 12.76,0 2.64,135.6 0.88,135.6" fill="#fff" opacity=".06"/></g><rect width="22" height="135" fill="url(#hill)"/><rect width="22" height="135" fill="url(#vig)"/><rect width="22" height="135" filter="url(#grain)" opacity=".045"/><rect width="3" height="135" fill="url(#edgeL)"/><rect y="132" width="22" height="3" fill="url(#edgeB)"/></g><g transform="matrix(1 0.855 0 1 1398.5 965.9)"><g class="hang"><rect x="-1" y="0" width="24" height="136.6" fill="#000" opacity=".92"/><rect x="-1" y="0" width="24" height="133.2" fill="url(#lam)"/><rect x="-1" y="133.2" width="24" height="3.4" fill="url(#rail)"/><rect x="-1" y="133.2" width="24" height=".7" fill="#6c7076" opacity=".8"/><rect x="-1" y="136.6" width="24" height="20" fill="url(#fall)"/></g><g class="pack"><rect x="-1" y="0" width="24" height="16.9" fill="url(#packp)"/><rect x="-1" y="15.8" width="24" height="1.1" fill="#0b0c0d"/><rect x="-1" y="16.9" width="24" height="6" fill="url(#fall)"/></g><rect x="-1" y="0" width="24" height="6" fill="url(#edgeT)"/></g></g>
-      <g id="glassdk"><polygon points="568.8,1015.3 637.2,1008.73 637.2,1114.5 568.8,1114.5" fill="#050910"/><polygon points="767.8,996.5 853.2,989.18 853.2,1093 767.8,1093" fill="#050910"/><polygon points="870,989.6 906,998.13 906,1097 870,1092" fill="#050910"/><polygon points="1257.8,974.8 1384.2,965.27 1384.2,1096 1257.8,1096" fill="#050910"/><polygon points="1398.5,965.9 1420.5,984.71 1420.5,1097.5 1398.5,1098.5" fill="#050910"/></g></svg></div>
+      <g id="glassdk"><polygon points="568.8,1015.3 637.2,1008.73 637.2,1114.5 568.8,1114.5" fill="#050910"/><polygon points="767.8,996.5 853.2,989.18 853.2,1093 767.8,1093" fill="#050910"/><polygon points="870,989.6 906,998.13 906,1097 870,1092" fill="#050910"/><polygon points="1257.8,974.8 1384.2,965.27 1384.2,1096 1257.8,1096" fill="#050910"/><polygon points="1398.5,965.9 1420.5,984.71 1420.5,1097.5 1398.5,1098.5" fill="#050910"/></g><g id="glasswm"><polygon points="568.8,1015.3 637.2,1008.73 637.2,1114.5 568.8,1114.5" fill="#ffc878"/><polygon points="767.8,996.5 853.2,989.18 853.2,1093 767.8,1093" fill="#ffc878"/><polygon points="870,989.6 906,998.13 906,1097 870,1092" fill="#ffc878"/><polygon points="1257.8,974.8 1384.2,965.27 1384.2,1096 1257.8,1096" fill="#ffc878"/><polygon points="1398.5,965.9 1420.5,984.71 1420.5,1097.5 1398.5,1098.5" fill="#ffc878"/></g></svg></div>
       <canvas id="stars" class="night-only"></canvas>
       <div class="orb orb-sun day-only"></div>
       <div class="orb orb-moon night-only"></div>
@@ -701,7 +704,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   root.setAttribute('data-theme','dark'); /* stran se vedno odpre v nočnem prizoru */
   function current(){var t=root.getAttribute('data-theme'); if(t) return t; return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
   /* blinds: lift the shutters when switching to light; lower them (and tilt the slats open) when switching to dark */
-  var blinds=document.getElementById('blinds'), blindTimer, slatRaf;
+  var blinds=document.getElementById('blinds'), blindTimer, gdTimer, slatRaf;
   /* lamele: vsaka je svoj element; ob dvigu/spustu se zlagajo v sveženj, nagib (zaprto/odprto) se animira posebej */
   var HC=4.5, HO=2.0, curH=HO, NS='http://www.w3.org/2000/svg', bw=[], bAnim;
   var sR=[].slice.call(document.querySelectorAll('#slat rect'));
@@ -763,7 +766,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   function raiseBlinds(){
     if(!blinds) return; clearTimeout(blindTimer);
     shadeUI(false);
-    blinds.classList.toggle('gdark',current()==='dark');
+    clearTimeout(gdTimer); if(current()==='dark') gdTimer=setTimeout(function(){blinds.classList.add('gdark')},4500); else blinds.classList.remove('gdark');
     blinds.classList.remove('up','down','show','open'); blinds.classList.add('on');
     slatTo(HC,700); blindsTo(1,9000);
     void blinds.getBoundingClientRect();
@@ -777,7 +780,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   }
   function lowerBlinds(){
     if(!blinds) return; clearTimeout(blindTimer); shadeUI(true);
-    blinds.classList.remove('gdark');
+    clearTimeout(gdTimer); blinds.classList.remove('gdark');
     blinds.classList.add('show','down'); blinds.classList.remove('up'); slatTo(HC,500); blindsTo(0,6000);
     /* once the shutters are down, the slats slowly tilt open and the lit interior shows through */
     blindTimer=setTimeout(function(){ if(current()==='dark') blinds.classList.add('open'); slatTo(HO,5500); },7200);
