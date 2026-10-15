@@ -125,11 +125,14 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 @keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(160px)}}
 .cloud{fill:#ffffff}
 .iwoff{opacity:0;transition:opacity 1s ease;filter:blur(.6px)}
-:root[data-int="off"] .iwoff{opacity:.82}
+:root[data-int="off"] .iwoff{opacity:1}
 .glow.iw{transition:opacity 1s ease}
 :root[data-int="off"] .glow.iw{opacity:0!important}
 .blinds.open.ioff .lit{opacity:0;transition:opacity .9s ease}
-.blinds.open.ioff .nd{opacity:.92;transition:opacity .9s ease}
+.blinds.open.ioff .nd{opacity:1;transition:opacity .9s ease}
+#slat rect{transition:opacity .9s ease}
+.blinds.ioff #slat rect:nth-child(3){opacity:.12}
+.blinds.ioff #slat rect:nth-child(1){opacity:.55}
 .hero.ptr{cursor:pointer}
 .scene .dim{position:absolute;inset:0;background:rgba(0,3,12,.62);animation:lightsOn 2.2s var(--ease) .5s both}
 @keyframes lightsOn{to{opacity:0}}
