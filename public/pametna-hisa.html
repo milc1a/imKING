@@ -618,7 +618,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   /* blinds: lift the shutters when switching to light; lower them (and tilt the slats open) when switching to dark */
   var blinds=document.getElementById('blinds'), blindTimer, slatRaf;
   /* lamele: vsaka je svoj element; ob dvigu/spustu se zlagajo v sveženj, nagib (zaprto/odprto) se animira posebej */
-  var HC=4.5, HO=2.0, curH=HO, NS='http://www.w3.org/2000/svg', bw=[], bAnim;
+  var HC=4.5, HO=2.0, curH=HC-(HC-HO)*.25, NS='http://www.w3.org/2000/svg', bw=[], bAnim, moveTimer;
   var sR=[].slice.call(document.querySelectorAll('#slat rect'));
   function setH(h){
     curH=h;
@@ -653,7 +653,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       for(var k=0;k<n;k++){ var u=document.createElementNS(NS,'use'); u.setAttribute('href','#slat'); g.appendChild(u); w.uses.push(u); }
       h.insertBefore(g,rs[1]); bw.push(w);
     });
-    setH(HO); bw.forEach(layout);
+    setH(curH); bw.forEach(layout);
   }
   function blindsTo(to,dur){
     cancelAnimationFrame(bAnim); var t0=null; bw.forEach(function(w){w.p0=w.p});
@@ -675,18 +675,21 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     slatRaf=requestAnimationFrame(step);
   }
   if(blinds) requestAnimationFrame(function(){requestAnimationFrame(function(){blinds.classList.remove('instant')})});
+  function oh(o){return HC-(HC-HO)*o}
   function raiseBlinds(){
-    if(!blinds) return; clearTimeout(blindTimer);
+    if(!blinds) return; clearTimeout(blindTimer); clearTimeout(moveTimer);
     blinds.classList.remove('up','down','show','open'); blinds.classList.add('on');
-    slatTo(HC,700); blindsTo(1,9000);
+    /* najprej se lamele zaprejo (odprtost 0 %), nato se žaluzija dvigne */
+    slatTo(oh(0),1500); moveTimer=setTimeout(function(){ blindsTo(1,9000); },1500);
     void blinds.getBoundingClientRect();
     requestAnimationFrame(function(){blinds.classList.add('up')});
   }
   function lowerBlinds(){
-    if(!blinds) return; clearTimeout(blindTimer);
-    blinds.classList.add('show','down'); blinds.classList.remove('up'); slatTo(HC,500); blindsTo(0,6000);
+    if(!blinds) return; clearTimeout(blindTimer); clearTimeout(moveTimer);
+    blinds.classList.add('show','down'); blinds.classList.remove('up'); /* najprej se spremeni kot lamel (60 %), nato se žaluzija spusti */
+    slatTo(oh(.6),1500); moveTimer=setTimeout(function(){ blindsTo(0,6000); },1500);
     /* once the shutters are down, the slats slowly tilt open and the lit interior shows through */
-    blindTimer=setTimeout(function(){ blinds.classList.add('open'); slatTo(HO,5500); },7200);
+    blindTimer=setTimeout(function(){ blinds.classList.add('open'); slatTo(oh(.25),2500); },8800);
   }
   document.getElementById('theme').addEventListener('click',function(){
     var next=current()==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
