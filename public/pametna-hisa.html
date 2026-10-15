@@ -301,9 +301,10 @@ figure{margin:0}
 .gal-zoom img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
 body.gal-lock{overflow:hidden}
 .gal-grid figure{position:relative;container-type:inline-size}
-.gal-grid figure::after,.zbox::after{content:"CONFIDENTIAL";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-32deg);font:800 12cqw/1 var(--font-display);letter-spacing:.06em;white-space:nowrap;color:rgba(255,255,255,.22);text-shadow:0 0 2px rgba(0,0,0,.3),0 1px 6px rgba(0,0,0,.22);pointer-events:none;user-select:none}
+#gal3 .gal-grid figure::after,.gal-zoom.wm .zbox::after{content:"CONFIDENTIAL";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-32deg);font:800 30cqw/1 var(--font-display);letter-spacing:.06em;white-space:nowrap;color:rgba(255,255,255,.22);text-shadow:0 0 2px rgba(0,0,0,.3),0 1px 6px rgba(0,0,0,.22);pointer-events:none;user-select:none}
 .zbox{position:relative;display:flex;max-width:100%;max-height:100%}
-.zbox::after{font-size:min(15vw,15vh)}
+.gal-zoom.wm .zbox{overflow:hidden;border-radius:6px}
+.gal-zoom.wm .zbox::after{font-size:var(--wmfs,min(14vw,14vh))}
 .zbox img{max-width:100%;max-height:calc(100vh - 48px);height:auto;width:auto}
 
 /* reference */
@@ -920,7 +921,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     o.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(g);} });
     g.querySelector('.gal-close').addEventListener('click',function(){close(false)});
     g.querySelector('[data-galclose]').addEventListener('click',function(e){e.preventDefault();close(false);window.scrollTo({top:0,behavior:'smooth'});});
-    g.querySelectorAll('figure').forEach(function(f){ f.addEventListener('click',function(){ zi.src=f.querySelector('img').src; z.classList.add('open'); }); });
+    g.querySelectorAll('figure').forEach(function(f){ f.addEventListener('click',function(){ zi.onload=function(){ zi.parentNode.style.setProperty('--wmfs',(zi.clientWidth*.3)+'px'); }; zi.src=f.querySelector('img').src; z.classList.toggle('wm',g.id==='gal3'); z.classList.add('open'); }); });
   });
 
   /* hover preview: slightly blurred strip of the gallery under the step title */
