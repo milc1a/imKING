@@ -175,7 +175,6 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .lightsw[aria-pressed="true"] svg{fill:#ffd75e;stroke:#ffd75e;filter:drop-shadow(0 0 6px rgba(255,208,90,.95)) drop-shadow(0 0 14px rgba(255,200,70,.6))}
 .lightsw .st{min-width:30px;text-align:center;padding:2px 8px;border-radius:999px;border:1px solid var(--hero-line);font-weight:600}
 .lightsw[aria-pressed="true"] .st{color:#1b1500;background:#ffd75e;border-color:#ffd75e}
-:root[data-theme="light"] .lightsw{display:none}
 :root[data-theme="light"] .shadesw{display:flex}
 .shadesw{cursor:default}
 .shadesw>svg{fill:none!important;stroke:currentColor!important;filter:none!important}
@@ -1072,19 +1071,14 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     btns.style.left=Math.max(8,Math.min(cx-w/2,W-w-8))+'px';
     btns.style.right='auto'; btns.style.bottom='auto';
     btns.style.top=Math.round(pB+GAP1)+'px';
-    var ls=document.getElementById('lightsw');
-    if(ls){ var ly=1215*s-(1566*s-H)-LIFT; ls.style.top=Math.round(ly)+'px'; ls.style.bottom='auto';
-      var l2=document.getElementById('lightsw2'); if(l2){ l2.style.top=Math.round(ly+ls.offsetHeight+10)+'px'; l2.style.bottom='auto'; }
-      var sh=document.getElementById('shadesw'), lit=ls.offsetParent!==null, bh=ls.offsetHeight||38, shy=lit?ly+2*(bh+10)+14:ly;
-      if(sh){ sh.style.top=Math.round(shy)+'px'; sh.style.bottom='auto'; }
-      /* začetek gumbov poravnan z levim robom povezave KNX v meniju (če je v meniju viden) */
-      var kn=document.querySelector('#top nav a[href="#kako"]'), hr=hero.getBoundingClientRect();
-      [ls,l2,sh].forEach(function(el){ if(!el) return;
-        if(kn&&kn.offsetParent!==null){ var kr=kn.getBoundingClientRect(); el.style.left=Math.round(kr.left-hr.left)+'px'; el.style.right='auto'; }
-        else { el.style.left=''; el.style.right=''; } });
-      /* tudi okrogla oznaka scene spodaj: levi rob poravnan z gumboma */
-      [].forEach.call(hero.querySelectorAll('.chip'),function(c){
-        if(kn&&kn.offsetParent!==null){ c.style.left=ls.style.left; c.style.right='auto'; if(l2){ c.style.top=Math.round(shy+(sh?sh.offsetHeight:bh)+26+2*c.offsetHeight)+'px'; c.style.bottom='auto'; } } else { c.style.left=''; c.style.right=''; c.style.top=''; c.style.bottom=''; } }); }
+    /* vsi štirje elementi (notranja osvetlitev, okolica, senčila, scena) v obeh režimih na isti poziciji: desno, tik nad zadnjo stopnico */
+    var ls=document.getElementById('lightsw'), l2=document.getElementById('lightsw2'), sh=document.getElementById('shadesw'),
+        chip=hero.querySelector('.chip:not([style*="display: none"])'), cs=[].slice.call(hero.querySelectorAll('.chip'));
+    var mob=window.innerWidth<=640, side=(mob?16:24)+'px', GP=10, HH=Math.ceil(H), B=Math.round(Math.max(72, HH-(window.innerHeight-24)+0)); if(HH-72<window.innerHeight-24) B=72;
+    var chipH=cs.reduce(function(m,c){return Math.max(m,c.offsetHeight);},0)||40;
+    cs.forEach(function(c){ c.style.left='auto'; c.style.right=side; c.style.top='auto'; c.style.bottom=B+'px'; });
+    var y=B+chipH+GP;
+    [sh,l2,ls].forEach(function(el){ if(!el) return; el.style.left='auto'; el.style.right=side; el.style.top='auto'; el.style.bottom=y+'px'; y+=(el.offsetHeight||40)+GP; });
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
   if(window.ResizeObserver) new ResizeObserver(place).observe(lead);
