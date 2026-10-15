@@ -987,7 +987,10 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       var kn=document.querySelector('#top nav a[href="#kako"]'), hr=hero.getBoundingClientRect();
       [ls,l2].forEach(function(el){ if(!el) return;
         if(kn&&kn.offsetParent!==null){ var kr=kn.getBoundingClientRect(); el.style.left=Math.round(kr.left-hr.left)+'px'; el.style.right='auto'; }
-        else { el.style.left=''; el.style.right=''; } }); }
+        else { el.style.left=''; el.style.right=''; } });
+      /* tudi okrogla oznaka scene spodaj: levi rob poravnan z gumboma */
+      [].forEach.call(hero.querySelectorAll('.chip'),function(c){
+        if(kn&&kn.offsetParent!==null){ c.style.left=ls.style.left; c.style.right='auto'; } else { c.style.left=''; c.style.right=''; } }); }
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
   if(window.ResizeObserver) new ResizeObserver(place).observe(lead);
