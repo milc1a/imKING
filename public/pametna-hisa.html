@@ -175,6 +175,10 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .lightsw .st{min-width:30px;text-align:center;padding:2px 8px;border-radius:999px;border:1px solid var(--hero-line);font-weight:600}
 .lightsw[aria-pressed="true"] .st{color:#1b1500;background:#ffd75e;border-color:#ffd75e}
 :root[data-theme="light"] .lightsw{display:none}
+:root[data-theme="light"] .shadesw{display:flex}
+.shadesw[aria-pressed="true"] svg,.shadesw[aria-pressed="false"] svg{fill:none;stroke:currentColor;filter:none}
+.shadesw[aria-pressed="true"] .st{color:var(--hero-ink);background:rgba(255,255,255,.16);border-color:var(--hero-line)}
+.shadesw:hover{border-color:var(--primary)}
 @media (max-width:640px){.lightsw{min-width:236px;right:var(--space-4);bottom:calc(var(--space-4) + 50px);font-size:10.5px;padding:8px 12px 8px 10px;gap:8px}}
 @keyframes chipIn{from{transform:translateY(14px)}to{transform:none}}
 .chip b{color:var(--hero-ink);font-weight:500}
@@ -473,6 +477,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     <span class="place">Črešnjevci, Gornja Radgona</span>
     <button type="button" class="lightsw" id="lightsw" aria-pressed="true" aria-label="Notranja osvetlitev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>NOTRANJA OSVETLITEV</span><span class="st" id="lightst">ON</span></button>
     <button type="button" class="lightsw" id="lightsw2" aria-pressed="true" aria-label="Osvetlitev okolice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>OSVETLITEV OKOLICE</span><span class="st" id="lightst2">ON</span></button>
+    <button type="button" class="lightsw shadesw" id="shadesw" aria-pressed="true" aria-label="Senčila"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5h16"/><path d="M5.5 7h13M5.5 10.5h13M5.5 14h13"/><path d="M12 14v4.5"/><path d="M10.4 18.5h3.2v2.2h-3.2z"/></svg><span>SENČILA</span><span class="st" id="shadest">DOL</span></button>
     <div class="chip day-only"><i aria-hidden="true"></i><span>1/0/4</span><b>Scena · Dan</b><span>AKTIVNA</span></div>
     <div class="chip night-only"><i aria-hidden="true"></i><span>1/0/5</span><b>Scena · Večer</b><span>AKTIVNA</span></div>
   </div>
@@ -750,21 +755,36 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   if(blinds) requestAnimationFrame(function(){requestAnimationFrame(function(){blinds.classList.remove('instant')})});
   function raiseBlinds(){
     if(!blinds) return; clearTimeout(blindTimer);
+    shadeUI(false);
     blinds.classList.remove('up','down','show','open'); blinds.classList.add('on');
     slatTo(HC,700); blindsTo(1,9000);
     void blinds.getBoundingClientRect();
     requestAnimationFrame(function(){blinds.classList.add('up')});
   }
+  function shadeUI(down){
+    var b=document.getElementById('shadesw'), t=document.getElementById('shadest'); if(!b) return;
+    b.setAttribute('aria-pressed',down?'true':'false'); t.textContent=down?'DOL':'GOR';
+  }
   function lowerBlinds(){
-    if(!blinds) return; clearTimeout(blindTimer);
+    if(!blinds) return; clearTimeout(blindTimer); shadeUI(true);
     blinds.classList.add('show','down'); blinds.classList.remove('up'); slatTo(HC,500); blindsTo(0,6000);
     /* once the shutters are down, the slats slowly tilt open and the lit interior shows through */
-    blindTimer=setTimeout(function(){ blinds.classList.add('open'); slatTo(HO,5500); },7200);
+    blindTimer=setTimeout(function(){ if(current()==='dark') blinds.classList.add('open'); slatTo(HO,5500); },7200);
   }
+  /* gumb SENČILA: senčila gor/dol v svetlem in temnem režimu */
+  (function(){
+    var sb=document.getElementById('shadesw'); if(!sb||!blinds) return;
+    sb.addEventListener('click',function(){
+      var down=sb.getAttribute('aria-pressed')==='true';
+      if(down){ raiseBlinds(); if(current()==='dark') blinds.classList.add('show'); }
+      else { lowerBlinds(); }
+    });
+  })();
   document.getElementById('theme').addEventListener('click',function(){
     var next=current()==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
     try{localStorage.setItem(KEY,next);}catch(e){}
     if(next==='light') raiseBlinds(); else lowerBlinds();
+    window.dispatchEvent(new Event('resize'));
     slideBtns();
   });
 
@@ -983,14 +1003,16 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var ls=document.getElementById('lightsw');
     if(ls){ var ly=1215*s-(1566*s-H)-LIFT; ls.style.top=Math.round(ly)+'px'; ls.style.bottom='auto';
       var l2=document.getElementById('lightsw2'); if(l2){ l2.style.top=Math.round(ly+ls.offsetHeight+10)+'px'; l2.style.bottom='auto'; }
+      var sh=document.getElementById('shadesw'), lit=ls.offsetParent!==null, bh=ls.offsetHeight||38, shy=lit?ly+2*(bh+10):ly;
+      if(sh){ sh.style.top=Math.round(shy)+'px'; sh.style.bottom='auto'; }
       /* začetek gumbov poravnan z levim robom povezave KNX v meniju (če je v meniju viden) */
       var kn=document.querySelector('#top nav a[href="#kako"]'), hr=hero.getBoundingClientRect();
-      [ls,l2].forEach(function(el){ if(!el) return;
+      [ls,l2,sh].forEach(function(el){ if(!el) return;
         if(kn&&kn.offsetParent!==null){ var kr=kn.getBoundingClientRect(); el.style.left=Math.round(kr.left-hr.left)+'px'; el.style.right='auto'; }
         else { el.style.left=''; el.style.right=''; } });
       /* tudi okrogla oznaka scene spodaj: levi rob poravnan z gumboma */
       [].forEach.call(hero.querySelectorAll('.chip'),function(c){
-        if(kn&&kn.offsetParent!==null){ c.style.left=ls.style.left; c.style.right='auto'; if(l2){ c.style.top=Math.round(ly+ls.offsetHeight+10+l2.offsetHeight+26+2*c.offsetHeight)+'px'; c.style.bottom='auto'; } } else { c.style.left=''; c.style.right=''; c.style.top=''; c.style.bottom=''; } }); }
+        if(kn&&kn.offsetParent!==null){ c.style.left=ls.style.left; c.style.right='auto'; if(l2){ c.style.top=Math.round(shy+(sh?sh.offsetHeight:bh)+26+2*c.offsetHeight)+'px'; c.style.bottom='auto'; } } else { c.style.left=''; c.style.right=''; c.style.top=''; c.style.bottom=''; } }); }
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
   if(window.ResizeObserver) new ResizeObserver(place).observe(lead);
