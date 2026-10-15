@@ -176,9 +176,14 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .lightsw[aria-pressed="true"] .st{color:#1b1500;background:#ffd75e;border-color:#ffd75e}
 :root[data-theme="light"] .lightsw{display:none}
 :root[data-theme="light"] .shadesw{display:flex}
-.shadesw[aria-pressed="true"] svg,.shadesw[aria-pressed="false"] svg{fill:none;stroke:currentColor;filter:none}
-.shadesw[aria-pressed="true"] .st{color:var(--hero-ink);background:rgba(255,255,255,.16);border-color:var(--hero-line)}
-.shadesw:hover{border-color:var(--primary)}
+.shadesw{cursor:default}
+.shadesw>svg{fill:none!important;stroke:currentColor!important;filter:none!important}
+.shadesw .arr{display:flex;flex-direction:column;align-items:center;gap:0;min-width:30px}
+.shadesw .arr button{all:unset;box-sizing:border-box;cursor:pointer;width:30px;height:12px;display:flex;align-items:center;justify-content:center;border-radius:6px;color:var(--hero-muted)}
+.shadesw .arr button svg{width:15px;height:7px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:none}
+.shadesw .arr button:hover{color:var(--hero-ink);background:rgba(255,255,255,.14)}
+.shadesw .arr button:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+.shadesw .arr button[aria-pressed="true"]{color:#1b1500;background:#ffd75e}
 @media (max-width:640px){.lightsw{min-width:236px;right:var(--space-4);bottom:calc(var(--space-4) + 50px);font-size:10.5px;padding:8px 12px 8px 10px;gap:8px}}
 @keyframes chipIn{from{transform:translateY(14px)}to{transform:none}}
 .chip b{color:var(--hero-ink);font-weight:500}
@@ -479,7 +484,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     <span class="place">Črešnjevci, Gornja Radgona</span>
     <button type="button" class="lightsw" id="lightsw" aria-pressed="true" aria-label="Notranja osvetlitev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>NOTRANJA OSVETLITEV</span><span class="st" id="lightst">ON</span></button>
     <button type="button" class="lightsw" id="lightsw2" aria-pressed="true" aria-label="Osvetlitev okolice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>OSVETLITEV OKOLICE</span><span class="st" id="lightst2">ON</span></button>
-    <button type="button" class="lightsw shadesw" id="shadesw" aria-pressed="true" aria-label="Senčila"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5h16"/><path d="M5.5 7h13M5.5 10.5h13M5.5 14h13"/><path d="M12 14v4.5"/><path d="M10.4 18.5h3.2v2.2h-3.2z"/></svg><span>SENČILA</span><span class="st" id="shadest">DOL</span></button>
+    <div class="lightsw shadesw" id="shadesw" role="group" aria-label="Senčila" data-state="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5h16"/><path d="M5.5 7h13M5.5 10.5h13M5.5 14h13"/><path d="M12 14v4.5"/><path d="M10.4 18.5h3.2v2.2h-3.2z"/></svg><span>SENČILA</span><span class="arr"><button type="button" id="shup" aria-label="Senčila gor"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 10l9-8 9 8"/></svg></button><button type="button" id="shdn" aria-label="Senčila dol" aria-pressed="true"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 2l9 8 9-8"/></svg></button></span></div>
     <div class="chip day-only"><i aria-hidden="true"></i><span>1/0/4</span><b>Scena · Dan</b><span>AKTIVNA</span></div>
     <div class="chip night-only"><i aria-hidden="true"></i><span>1/0/5</span><b>Scena · Večer</b><span>AKTIVNA</span></div>
   </div>
@@ -765,8 +770,10 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     requestAnimationFrame(function(){blinds.classList.add('up')});
   }
   function shadeUI(down){
-    var b=document.getElementById('shadesw'), t=document.getElementById('shadest'); if(!b) return;
-    b.setAttribute('aria-pressed',down?'true':'false'); t.textContent=down?'DOL':'GOR';
+    var b=document.getElementById('shadesw'); if(!b) return;
+    b.setAttribute('data-state',down?'down':'up');
+    document.getElementById('shdn').setAttribute('aria-pressed',down?'true':'false');
+    document.getElementById('shup').setAttribute('aria-pressed',down?'false':'true');
   }
   function lowerBlinds(){
     if(!blinds) return; clearTimeout(blindTimer); shadeUI(true);
@@ -778,10 +785,13 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   /* gumb SENČILA: senčila gor/dol v svetlem in temnem režimu */
   (function(){
     var sb=document.getElementById('shadesw'); if(!sb||!blinds) return;
-    sb.addEventListener('click',function(){
-      var down=sb.getAttribute('aria-pressed')==='true';
-      if(down){ raiseBlinds(); if(current()==='dark') blinds.classList.add('show'); }
-      else { lowerBlinds(); }
+    document.getElementById('shup').addEventListener('click',function(){
+      if(sb.getAttribute('data-state')==='up') return;
+      raiseBlinds(); if(current()==='dark') blinds.classList.add('show');
+    });
+    document.getElementById('shdn').addEventListener('click',function(){
+      if(sb.getAttribute('data-state')==='down') return;
+      lowerBlinds();
     });
   })();
   document.getElementById('theme').addEventListener('click',function(){
