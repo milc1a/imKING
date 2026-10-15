@@ -200,10 +200,10 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds{pointer-events:none}
 .blinds .pack{display:none}
 #glassdk,#glasswm{opacity:0;transition:opacity .8s ease}
-:root[data-theme="dark"] .blinds g[filter="url(#blurI)"]{filter:brightness(1.05)}
-:root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurI)"]{filter:brightness(1.05)}
+:root[data-theme="dark"] .blinds g[filter="url(#blurI)"]{filter:brightness(.63)}
+:root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurI)"]{filter:brightness(.63)}
 :root[data-theme="dark"] .blinds g[filter="url(#blurX)"]{filter:contrast(1.3) saturate(.95)}
-@media (prefers-color-scheme:dark){:root:not([data-theme]) .blinds g[filter="url(#blurI)"]{filter:brightness(1.05)}:root:not([data-theme]) .blinds g[filter="url(#blurX)"]{filter:contrast(1.18) saturate(.85)}}
+@media (prefers-color-scheme:dark){:root:not([data-theme]) .blinds g[filter="url(#blurI)"]{filter:brightness(.63)}:root:not([data-theme]) .blinds g[filter="url(#blurX)"]{filter:contrast(1.18) saturate(.85)}}
 .blinds.gdark #glassdk{opacity:.32;transition:opacity 1.2s ease}
 .blinds.gdark #glasswm{opacity:.2;mix-blend-mode:screen;transition:opacity 1.2s ease}
 .blinds.gdark.ioff #glassdk{opacity:0}
@@ -214,7 +214,7 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds.nightup.ioff .hang>:first-child{opacity:0}
 :root[data-theme="dark"] .blinds .gt{opacity:0}
 :root[data-theme="dark"] .blinds .nd{opacity:0;transition:opacity 1s ease}
-:root[data-theme="dark"] .blinds .lit{fill:#ffdcb9;opacity:.19;mix-blend-mode:screen;transition:opacity 1s ease}
+:root[data-theme="dark"] .blinds .lit{fill:#ffdcb9;opacity:.114;mix-blend-mode:screen;transition:opacity 1s ease}
 :root[data-theme="dark"] .blinds.ioff .nd{opacity:.7}
 :root[data-theme="dark"] .blinds.ioff .lit{opacity:0}
 #glassdk,#glasswm{display:none}
