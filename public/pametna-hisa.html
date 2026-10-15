@@ -131,8 +131,9 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds.open.ioff .lit{opacity:0;transition:opacity .9s ease}
 .blinds.open.ioff .nd{opacity:1;transition:opacity .9s ease}
 #slat rect{transition:opacity .9s ease}
-.blinds.ioff #slat rect:nth-child(3){opacity:.12}
-.blinds.ioff #slat rect:nth-child(1){opacity:.55}
+.blinds.ioff #slat rect:nth-child(3){opacity:0}
+.blinds.ioff rect[fill="url(#refl)"],.blinds.ioff g[filter="url(#blurS)"]{opacity:0;transition:opacity .9s ease}
+.blinds.ioff #slat rect:nth-child(1){fill:#16191d;opacity:1}
 .hero.ptr{cursor:pointer}
 .scene .dim{position:absolute;inset:0;background:rgba(0,3,12,.62);animation:lightsOn 2.2s var(--ease) .5s both}
 @keyframes lightsOn{to{opacity:0}}
