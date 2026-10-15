@@ -198,7 +198,10 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 #glassdk,#glasswm{opacity:0;transition:opacity .8s ease}
 .blinds.gdark #glassdk{opacity:.4;transition:opacity 1.2s ease}
 .blinds.gdark #glasswm{opacity:.2;mix-blend-mode:screen;transition:opacity 1.2s ease}
-.blinds.gdark.ioff #glassdk{opacity:1}
+.blinds.gdark.ioff #glassdk{opacity:.12}
+.blinds.nightup.ioff .lit{opacity:0}
+.blinds.nightup.ioff .nd{opacity:.85;transition:opacity 1.5s ease}
+.blinds.nightup.ioff .hang>rect:first-child{opacity:0}
 .blinds.gdark.ioff #glasswm{opacity:0}
 .blinds.show{opacity:1!important;z-index:1}
 .blinds .gbk{display:none}
@@ -766,6 +769,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   function raiseBlinds(){
     if(!blinds) return; clearTimeout(blindTimer);
     shadeUI(false);
+    blinds.classList.toggle('nightup',current()==='dark');
     clearTimeout(gdTimer); if(current()==='dark') gdTimer=setTimeout(function(){blinds.classList.add('gdark')},4500); else blinds.classList.remove('gdark');
     blinds.classList.remove('up','down','show','open'); blinds.classList.add('on');
     slatTo(HC,700); blindsTo(1,9000);
@@ -780,6 +784,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   }
   function lowerBlinds(){
     if(!blinds) return; clearTimeout(blindTimer); shadeUI(true);
+    blinds.classList.remove('nightup');
     clearTimeout(gdTimer); blinds.classList.remove('gdark');
     blinds.classList.add('show','down'); blinds.classList.remove('up'); slatTo(HC,500); blindsTo(0,6000);
     /* once the shutters are down, the slats slowly tilt open and the lit interior shows through */
