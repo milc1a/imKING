@@ -882,20 +882,25 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
   }
 })();
 
-/* Gumba v naslovni sliki: vodoravno na sredini nad dimnikom (x=975 v fotografiji 1920x1566, vrh dimnika 751 px nad spodnjim robom slike) */
+/* Gumba sta vedno tik pod odstavkom, dimnik na fotografiji (x=975, vrh 751 px nad spodnjim robom slike 1920x1566) pa vedno takoj pod gumboma:
+   višina naslovnega dela se izračuna iz položaja odstavka, zato velja pri vsaki ločljivosti in povečavi */
 (function(){
-  var hero=document.querySelector('.hero'), btns=hero&&hero.querySelector('.btns');
-  if(!btns) return;
+  var hero=document.querySelector('.hero'), btns=hero&&hero.querySelector('.btns'), lead=hero&&hero.querySelector('.hero-copy p');
+  if(!btns||!lead) return;
+  var LIFT=32, GAP1=26, GAP2=34;
   function place(){
-    var W=hero.clientWidth, H=hero.clientHeight;
-    var s=Math.max(W/1920,H/1566);
-    var cx=975*s-(1920*s-W)/2;
-    var w=btns.offsetWidth;
+    var W=hero.clientWidth, pB=lead.getBoundingClientRect().bottom-hero.getBoundingClientRect().top;
+    var Yc=pB+GAP1+btns.offsetHeight+GAP2, sW=W/1920, H=Yc+LIFT+751*sW, s=sW;
+    if(H>1566*sW){ H=(Yc+LIFT)/(1-751/1566); s=H/1566; }
+    hero.style.minHeight=Math.ceil(H)+'px';
+    var cx=975*s-(1920*s-W)/2, w=btns.offsetWidth;
     btns.style.left=Math.max(8,Math.min(cx-w/2,W-w-8))+'px';
-    btns.style.right='auto';
-    btns.style.bottom=Math.round(751*s+46+32-16)+'px';
+    btns.style.right='auto'; btns.style.bottom='auto';
+    btns.style.top=Math.round(pB+GAP1)+'px';
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
+  if(window.ResizeObserver) new ResizeObserver(place).observe(lead);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(place);
 })();
 </script>
 
