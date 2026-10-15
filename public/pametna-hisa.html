@@ -1079,7 +1079,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls){ c.style.width=ls.offsetWidth+'px'; c.style.height=ls.offsetHeight+'px'; } });
     chipH=ls?ls.offsetHeight:chipH;
     cs.forEach(function(c){ c.style.left='auto'; c.style.right=side; c.style.top='auto'; c.style.bottom=B+'px'; });
-    var y=B+chipH+GP;
+    var y=B+chipH+GP+(ls?ls.offsetHeight:42); /* trije gumbi dvignjeni za 1 višino gumba */
     [sh,l2,ls].forEach(function(el){ if(!el) return; el.style.left='auto'; el.style.right=side; el.style.top='auto'; el.style.bottom=y+'px'; y+=(el.offsetHeight||40)+GP; });
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
