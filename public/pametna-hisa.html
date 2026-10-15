@@ -196,6 +196,9 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .blinds{pointer-events:none}
 .blinds .pack{display:none}
 #glassdk,#glasswm{opacity:0;transition:opacity .8s ease}
+:root[data-theme="dark"] .blinds g[filter="url(#blurI)"]{filter:none}
+:root[data-theme="dark"] .blinds g[filter="url(#blurX)"]{filter:contrast(1.18) saturate(.85)}
+@media (prefers-color-scheme:dark){:root:not([data-theme]) .blinds g[filter="url(#blurI)"]{filter:none}:root:not([data-theme]) .blinds g[filter="url(#blurX)"]{filter:contrast(1.18) saturate(.85)}}
 .blinds.gdark #glassdk{opacity:.2;transition:opacity 1.2s ease}
 .blinds.gdark #glasswm{opacity:.2;mix-blend-mode:screen;transition:opacity 1.2s ease}
 .blinds.gdark.ioff #glassdk{opacity:0}
