@@ -257,7 +257,7 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 @keyframes saFl{0%{opacity:0;stroke-dashoffset:0}3%{opacity:1}30%{opacity:1;stroke-dashoffset:-200}34%,100%{opacity:0;stroke-dashoffset:-200}}
 /* animacija odstranjena: statična shema */
 .sa .hl,.sa .fl{animation:none!important;opacity:0!important}
-.sa-list{margin-top:var(--space-6);border-top:1px solid var(--line);font:400 12px/20px var(--font-mono);color:var(--muted)}
+.sa-list{margin-top:0;border-top:1px solid var(--line);font:400 12px/20px var(--font-mono);color:var(--muted)}
 .sa-list li{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-4);padding-block:8px;border-bottom:1px solid var(--line)}
 .sa-list li span:last-child{text-align:right;color:var(--ink)}
 .sa-list li span:nth-child(2){color:var(--primary)}
@@ -571,20 +571,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
           <p class="lead">Stikala, tipke in senzorji so vhodne naprave, ki zaznajo pritisk, gibanje, temperaturo ali svetlobo in po KNX vodilu pošljejo sporočilo. Aktuatorji so izhodne naprave, ki sprejmejo sporočilo in preklopijo razsvetljavo, spustijo senčila ali vklopijo druge porabnike. Povezavo med njimi določa SW program in ne ožičenje, zato lahko stikalo kadar koli prevzame drugo funkcijo. Ena tipka stikala ima lahko več funkcij npr. kratek pritisk vklop luči, ponoven pritisk dimmanje luči, dolg pritisk tipke spust žaluzij ipd.</p>
         </div>
         <figure class="bus" data-reveal>
-          <svg viewBox="0 0 520 270" role="img" aria-label="Shema: stikala in senzorji pošiljajo ukaze po vodilu KNX aktuatorjem, ki vklapljajo razsvetljavo, senčila in ogrevanje."><text class="tm" x="10" y="16">STIKALA IN SENZORJI</text><text class="tm" x="510" y="16" text-anchor="end">AKTUATORJI</text><path class="bs1" d="M255 22 V262"/><path class="bs2" d="M265 22 V262"/><g class="p1"><rect class="nd2" x="10" y="30" width="150" height="52" rx="8"/><text class="tx2" x="24" y="53">Stikalo</text><text class="tm" x="24" y="70">TIPKA · SCENA</text>
-<rect class="nd2" x="360" y="30" width="150" height="52" rx="8"/><text class="tx2" x="374" y="53">Aktuator luči</text><text class="tm" x="374" y="70">DALI / DIMMER</text>
-<path class="ln" d="M160 56 H255 M265 56 H360"/>
-<rect class="hl p1" x="10" y="30" width="150" height="52" rx="8"/><rect class="hl p1" x="360" y="30" width="150" height="52" rx="8"/>
-<path class="fl p1" d="M160 56 H360"/></g><g class="p2"><rect class="nd2" x="10" y="110" width="150" height="52" rx="8"/><text class="tx2" x="24" y="133">Senzor prisotnosti</text><text class="tm" x="24" y="150">GIBANJE · SVETLOBA</text>
-<rect class="nd2" x="360" y="110" width="150" height="52" rx="8"/><text class="tx2" x="374" y="133">Aktuator senčil</text><text class="tm" x="374" y="150">4 × ŽALUZIJE</text>
-<path class="ln" d="M160 136 H255 M265 136 H360"/>
-<rect class="hl p2" x="10" y="110" width="150" height="52" rx="8"/><rect class="hl p2" x="360" y="110" width="150" height="52" rx="8"/>
-<path class="fl p2" d="M160 136 H360"/></g><g class="p3"><rect class="nd2" x="10" y="190" width="150" height="52" rx="8"/><text class="tx2" x="24" y="213">Temperaturni senzor</text><text class="tm" x="24" y="230">SOBA · TLA</text>
-<rect class="nd2" x="360" y="190" width="150" height="52" rx="8"/><text class="tx2" x="374" y="213">Aktuator ogrevanja</text><text class="tm" x="374" y="230">TALNO OGREVANJE</text>
-<path class="ln" d="M160 216 H255 M265 216 H360"/>
-<rect class="hl p3" x="10" y="190" width="150" height="52" rx="8"/><rect class="hl p3" x="360" y="190" width="150" height="52" rx="8"/>
-<path class="fl p3" d="M160 216 H360"/></g></svg>
-          <ul class="sa-list">
+<ul class="sa-list">
             <li><span>Tipka · vhod</span><span>→</span><span>Luči · dnevna soba</span></li>
             <li><span>Senzor prisotnosti</span><span>→</span><span>Senčila · jug</span></li>
             <li><span>Temperaturni senzor</span><span>→</span><span>Ogrevanje · tla</span></li>
