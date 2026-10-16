@@ -427,6 +427,11 @@ summary:hover{color:var(--primary)}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"";flex:none;width:12px;height:12px;margin-top:8px;background:linear-gradient(var(--muted),var(--muted)) center/12px 1.5px no-repeat,linear-gradient(var(--muted),var(--muted)) center/1.5px 12px no-repeat;transition:transform .35s var(--ease)}
 details[open] summary::after{transform:rotate(45deg)}
+.faq-sub{font:600 16px/24px var(--font-sans);color:var(--ink);margin:0 0 var(--space-2)}
+.faq-tbl{width:100%;border-collapse:collapse;margin-top:var(--space-4);font-size:14px;line-height:20px}
+.faq-tbl th,.faq-tbl td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.faq-tbl th{color:var(--muted);font:500 12px/16px var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.faq-tbl td:first-child{color:var(--ink)}
 details .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
 details[open] .ans{grid-template-rows:1fr}
 details .ans>div{overflow:hidden}
@@ -710,7 +715,15 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
         </details>
         <details>
           <summary>Ali je KNX inštalacija dražja od klasične?</summary>
-          <div class="ans"><div><p>Začetna naložba je običajno višja, saj so KNX naprave (tipkala, aktuatorji, napajalniki) dražje od klasičnih stikal in rel. Razlika je odvisna predvsem od obsega funkcij. Prednost je, da se funkcije kasneje spreminjajo s programiranjem in ne s posegi v stene, inštalacijo pa lahko po potrebi razširjate. Natančen strošek določimo na podlagi načrta in želenih funkcij.</p></div></div>
+          <div class="ans"><div><p>Da, vgradnja KNX inštalacije je praviloma dražja od klasične električne inštalacije, predvsem zaradi dražjih komponent, krmilnih modulov, načrtovanja in programiranja. Kolikšna je razlika, je odvisno predvsem od velikosti hiše in tega, koliko funkcij želiš avtomatizirati.</p>
+          <h3 class="faq-sub">Za koliko je KNX dražji?</h3>
+          <p>Za orientacijo pri novogradnji enodružinske hiše bi uporabil naslednje okvirne ocene:</p>
+          <table class="faq-tbl"><thead><tr><th>Izvedba</th><th>Okvirna razlika glede na klasično inštalacijo</th></tr></thead><tbody>
+            <tr><td>Klasična inštalacija</td><td>Izhodišče</td></tr>
+            <tr><td>KNX za osnovno avtomatizacijo</td><td>približno 20–40 % dražje</td></tr>
+            <tr><td>KNX za celovito pametno hišo</td><td>približno 40–80 % dražje</td></tr>
+            <tr><td>KNX z veliko funkcijami in zahtevnimi upravljalniki</td><td>lahko več kot 100 % dražje</td></tr>
+          </tbody></table></div></div>
         </details>
       </div>
     </div>
