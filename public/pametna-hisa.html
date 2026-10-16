@@ -269,6 +269,24 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 @media (max-width:560px){.stats{grid-template-columns:1fr}.stats div+div{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:var(--space-6)}}
 
 
+/* mobilna optimizacija */
+@media (max-width:640px){
+  .lead{font-size:16.5px;line-height:26px}
+  section{padding-block:64px}
+  .head{margin-bottom:var(--space-12)}
+  .stats{margin-top:var(--space-12)}
+  .lightsw{min-width:0;height:56px;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:3px;padding:6px 6px;border-radius:16px;font-size:10px}
+  .lightsw>span:not(.st):not(.arr){display:none}
+  .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/12px var(--font-mono);letter-spacing:.08em}
+  .lightsw svg{width:18px;height:18px}
+  .lightsw .st{min-width:26px;padding:1px 6px;font-size:10px}
+  .shadesw .arr button{height:16px;width:36px}
+  .chip{height:36px;box-sizing:border-box;justify-content:center;font-size:10.5px;padding:0 10px;gap:6px}
+  .sa-demo .sad-t{font-size:15px}.sa-demo .sad-t.sad-p{font-size:19px}
+  .sa-demo .z{opacity:.5}
+  .gal-bar h2{font-size:13px}
+  .gal-grid{padding:12px;gap:12px}
+}
 /* interaktivna shema stikalo → aktuatorji → porabniki */
 .sa-demo svg{overflow:visible;max-width:640px;margin-inline:auto}
 .sad-lines path{stroke:#5fb4ff;stroke-width:1.6;fill:none}
@@ -546,9 +564,9 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
       </div>
     </div>
     <span class="place">Črešnjevci, Gornja Radgona</span>
-    <button type="button" class="lightsw" id="lightsw" aria-pressed="true" aria-label="Notranja osvetlitev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>NOTRANJA OSVETLITEV</span><span class="st" id="lightst">ON</span></button>
-    <button type="button" class="lightsw" id="lightsw2" aria-pressed="true" aria-label="Osvetlitev okolice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>OSVETLITEV OKOLICE</span><span class="st" id="lightst2">ON</span></button>
-    <div class="lightsw shadesw" id="shadesw" role="group" aria-label="Senčila" data-state="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5h16"/><path d="M5.5 7h13M5.5 10.5h13M5.5 14h13"/><path d="M12 14v4.5"/><path d="M10.4 18.5h3.2v2.2h-3.2z"/></svg><span>SENČILA</span><span class="arr"><button type="button" id="shup" aria-label="Senčila gor"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 10l9-8 9 8"/></svg></button><button type="button" id="shdn" aria-label="Senčila dol" aria-pressed="true"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 2l9 8 9-8"/></svg></button></span></div>
+    <button type="button" class="lightsw" data-s="NOTRANJA" id="lightsw" aria-pressed="true" aria-label="Notranja osvetlitev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>NOTRANJA OSVETLITEV</span><span class="st" id="lightst">ON</span></button>
+    <button type="button" class="lightsw" data-s="OKOLICA" id="lightsw2" aria-pressed="true" aria-label="Osvetlitev okolice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.1v.6h5.4v-.6c0-.8.4-1.6 1.1-2.1A6.5 6.5 0 0 0 12 2.5z"/><path d="M9.6 19.4h4.8M10.6 22h2.8"/></svg><span>OSVETLITEV OKOLICE</span><span class="st" id="lightst2">ON</span></button>
+    <div class="lightsw shadesw" data-s="SENČILA" id="shadesw" role="group" aria-label="Senčila" data-state="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5h16"/><path d="M5.5 7h13M5.5 10.5h13M5.5 14h13"/><path d="M12 14v4.5"/><path d="M10.4 18.5h3.2v2.2h-3.2z"/></svg><span>SENČILA</span><span class="arr"><button type="button" id="shup" aria-label="Senčila gor"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 10l9-8 9 8"/></svg></button><button type="button" id="shdn" aria-label="Senčila dol" aria-pressed="true"><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M3 2l9 8 9-8"/></svg></button></span></div>
     <div class="chip day-only"><i aria-hidden="true"></i><span>1/0/4</span><b>Scena · Dan</b><span>AKTIVNA</span></div>
     <div class="chip night-only"><i aria-hidden="true"></i><span>1/0/5</span><b>Scena · Večer</b><span>AKTIVNA</span></div>
   </div>
@@ -1132,6 +1150,14 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
     var ls=document.getElementById('lightsw'), l2=document.getElementById('lightsw2'), sh=document.getElementById('shadesw'),
         chip=hero.querySelector('.chip:not([style*="display: none"])'), cs=[].slice.call(hero.querySelectorAll('.chip'));
     var mob=window.innerWidth<=640, side=(mob?16:24)+'px', GP=10, HH=Math.ceil(H), B=Math.round(Math.max(72, HH-(window.innerHeight-24)+0)); if(HH-72<window.innerHeight-24) B=72;
+    if(mob){
+      B=(HH-16<window.innerHeight-16)?16:Math.round(HH-(window.innerHeight-16));
+      var G=8, sd=16, bw=Math.floor((hero.clientWidth-2*sd-2*G)/3);
+      cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=sd+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=(hero.clientWidth-2*sd)+'px'; c.style.height='36px'; c.style.padding='0 10px'; c.style.bottom=B+'px'; });
+      [ls,l2,sh].forEach(function(el,i){ if(!el) return; el.style.left=(sd+i*(bw+G))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw+'px'; el.style.height='56px'; el.style.bottom=(B+36+G)+'px'; });
+      return;
+    }
+    [ls,l2,sh].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
     var chipH=cs.reduce(function(m,c){return Math.max(m,c.offsetHeight);},0)||40;
     cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls){ c.style.width=ls.offsetWidth+'px'; c.style.height=ls.offsetHeight+'px'; } });
     chipH=ls?ls.offsetHeight:chipH;
