@@ -432,6 +432,11 @@ details[open] summary::after{transform:rotate(45deg)}
 .faq-tbl th,.faq-tbl td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .faq-tbl th{color:var(--muted);font:500 12px/16px var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
 .faq-tbl td:first-child{color:var(--ink)}
+.faq-sub2{margin-top:var(--space-6)}
+.faq-list{margin:0;padding:0 0 var(--space-6);list-style:none;display:grid;gap:10px;color:var(--muted);max-width:62ch}
+.faq-list li{padding-left:16px;position:relative}.faq-list li::before{content:"";position:absolute;left:0;top:.7em;width:5px;height:5px;border-radius:50%;background:var(--primary)}
+.faq-list strong{color:var(--ink);font-weight:500}
+.faq-note{margin-top:var(--space-4)}
 details .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
 details[open] .ans{grid-template-rows:1fr}
 details .ans>div{overflow:hidden}
@@ -723,7 +728,24 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
             <tr><td>KNX za osnovno avtomatizacijo</td><td>približno 20–40 % dražje</td></tr>
             <tr><td>KNX za celovito pametno hišo</td><td>približno 40–80 % dražje</td></tr>
             <tr><td>KNX z veliko funkcijami in zahtevnimi upravljalniki</td><td>lahko več kot 100 % dražje</td></tr>
-          </tbody></table></div></div>
+          </tbody></table>
+          <h3 class="faq-sub faq-sub2">Primer za hišo velikosti 150 m²</h3>
+          <p>Po javno objavljenih slovenskih cenikih se običajne elektroinštalacije gibljejo približno med 44 in 69 €/m², pametne inštalacije pa so lahko precej dražje glede na izbrano funkcionalnost.</p>
+          <p>Za lažjo predstavo bi pri primerjavi ponudb predvidel naslednji proračun:</p>
+          <table class="faq-tbl"><thead><tr><th>Sistem</th><th>Okvirni proračun</th></tr></thead><tbody>
+            <tr><td>Klasična elektroinštalacija</td><td>6.600–10.350 €</td></tr>
+            <tr><td>KNX z osnovno avtomatizacijo</td><td>8.000–13.000 €</td></tr>
+            <tr><td>KNX za luči, žaluzije in ogrevanje</td><td>10.000–16.000 € ali več</td></tr>
+          </tbody></table>
+          <p class="faq-note">Zneski so zgolj orientacijski. Pomembno je, ali so v ceni vključeni DDV, svetila, pogoni žaluzij, termostati, programiranje in končna konfiguracija.</p>
+          <h3 class="faq-sub">Kdaj se KNX najbolj splača?</h3>
+          <ul class="faq-list">
+            <li><strong>Novogradnja:</strong> najlažje je že v projektu predvideti vodila, omarico in vse potrebne kable.</li>
+            <li><strong>Luči in žaluzije:</strong> avtomatizacija omogoča skupinske ukaze in scenarije, na primer »odhod od doma«.</li>
+            <li><strong>Ogrevanje in hlajenje:</strong> sistem lahko povezuje regulacijo temperatur, senčila in druge funkcije.</li>
+            <li><strong>Postopna izvedba:</strong> lahko že vnaprej pripraviš napeljavo za več funkcij, vgradiš pa jih pozneje.</li>
+          </ul>
+          <p>Pri KNX ni pomembna samo cena namestitve, temveč tudi to, da dobiš sistem, ki ga lahko dolgoročno nadgrajuješ.</p></div></div>
         </details>
       </div>
     </div>
