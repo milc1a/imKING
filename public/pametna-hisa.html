@@ -270,7 +270,7 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 
 
 /* mobilna optimizacija */
-@media (max-width:640px){
+@media (max-width:640px){.hero .scene{bottom:calc(var(--lift) + var(--band,0px))}
   .lead{font-size:16.5px;line-height:26px}
   section{padding-block:64px}
   .head{margin-bottom:var(--space-12)}
@@ -1151,12 +1151,13 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
         chip=hero.querySelector('.chip:not([style*="display: none"])'), cs=[].slice.call(hero.querySelectorAll('.chip'));
     var mob=window.innerWidth<=640, side=(mob?16:24)+'px', GP=10, HH=Math.ceil(H), B=Math.round(Math.max(72, HH-(window.innerHeight-24)+0)); if(HH-72<window.innerHeight-24) B=72;
     if(mob){
-      B=(HH-16<window.innerHeight-16)?16:Math.round(HH-(window.innerHeight-16));
+      B=16; var BAND=16+36+8+56+16; hero.style.setProperty('--band',BAND+'px'); hero.style.minHeight=(HH+BAND)+'px'; /* gumbi pod sliko hiše */
       var G=8, sd=16, bw=Math.floor((hero.clientWidth-2*sd-2*G)/3);
       cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=sd+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=(hero.clientWidth-2*sd)+'px'; c.style.height='36px'; c.style.padding='0 10px'; c.style.bottom=B+'px'; });
       [ls,l2,sh].forEach(function(el,i){ if(!el) return; el.style.left=(sd+i*(bw+G))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw+'px'; el.style.height='56px'; el.style.bottom=(B+36+G)+'px'; });
       return;
     }
+    hero.style.removeProperty('--band');
     [ls,l2,sh].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
     var chipH=cs.reduce(function(m,c){return Math.max(m,c.offsetHeight);},0)||40;
     cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls){ c.style.width=ls.offsetWidth+'px'; c.style.height=ls.offsetHeight+'px'; } });
