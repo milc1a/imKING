@@ -508,6 +508,124 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
 
 .frm{display:none}
 :root[data-theme="dark"] .frm{display:block}
+/* ============ moderen profesionalen videz (nadgradnja: barve, gumbi, kartice) ============ */
+:root{
+  --ink:#0b1220; --muted:#566178; --line:#e3e8f1; --surface:#f5f8fd; --surface-2:#eef3fb;
+  --primary:#1f5eff; --primary-strong:#1448d6; --primary-soft:rgba(31,94,255,.09); --glow:rgba(31,94,255,.22);
+  --radius-md:12px; --radius-lg:18px;
+  --sh-1:0 1px 2px rgba(11,18,32,.05),0 1px 1px rgba(11,18,32,.03);
+  --sh-2:0 1px 2px rgba(11,18,32,.05),0 12px 32px -12px rgba(11,18,32,.18);
+  --btn-grad:linear-gradient(180deg,#3a74ff 0%,#1f5eff 55%,#1a52e6 100%);
+  --btn-sh:inset 0 1px 0 rgba(255,255,255,.28),0 1px 2px rgba(20,60,190,.35),0 8px 20px -8px rgba(31,94,255,.6);
+}
+:root[data-theme="dark"]{
+  --bg:#05070d; --ink:#eef2fa; --muted:#8e99b0; --line:#1b2233; --node:#05070d; --surface:#0a0f1a; --surface-2:#0e1523;
+  --primary:#6b9bff; --primary-strong:#9bbaff; --primary-soft:rgba(107,155,255,.12); --glow:rgba(107,155,255,.3); --hero-fade:#05070d;
+  --sh-1:0 1px 2px rgba(0,0,0,.4); --sh-2:0 1px 2px rgba(0,0,0,.5),0 16px 36px -14px rgba(0,0,0,.7);
+  --btn-grad:linear-gradient(180deg,#86adff 0%,#6b9bff 55%,#5b8ff0 100%);
+  --btn-sh:inset 0 1px 0 rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.5),0 8px 22px -8px rgba(91,143,240,.55);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05070d;--hero-fade:#05070d}}
+body{letter-spacing:-.005em}
+h1,h2,h3{font-weight:700}
+h1{letter-spacing:-.035em}
+h2{letter-spacing:-.028em}
+::selection{background:var(--primary);color:#fff}
+
+/* glava */
+header.scrolled{border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(11,18,32,.02),0 8px 24px -16px rgba(11,18,32,.18)}
+nav a{font-weight:500;font-size:14.5px}
+nav a::after{height:2px;border-radius:2px;background:var(--primary);bottom:-8px}
+header.over nav a::after{background:var(--hero-ink)}
+.toggle{border-radius:12px;width:38px;height:38px;background:color-mix(in srgb,var(--bg) 60%,transparent);box-shadow:var(--sh-1)}
+header.over .toggle{background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+.logo{font-weight:800}
+
+/* oznake (label): pilula namesto velikih črk */
+.label{display:inline-flex;align-items:center;gap:8px;width:fit-content;font:500 13px/18px var(--font-sans);letter-spacing:0;text-transform:none;color:var(--primary);background:var(--primary-soft);border:1px solid color-mix(in srgb,var(--primary) 22%,transparent);border-radius:999px;padding:5px 12px}
+.hero .status{color:#fff;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+/* gumbi */
+a.btn,button.btn{border-radius:12px;padding:13px 22px;font-weight:600;letter-spacing:-.005em;border:1px solid rgba(255,255,255,.16);background:var(--btn-grad);color:#fff;box-shadow:var(--btn-sh);transition:transform .25s var(--ease),box-shadow .25s var(--ease),filter .25s}
+:root[data-theme="dark"] a.btn,:root[data-theme="dark"] button.btn{color:#04122e;border-color:rgba(255,255,255,.25)}
+a.btn:hover,button.btn:hover{background:var(--btn-grad);color:#fff;filter:brightness(1.06);transform:translateY(-1px);box-shadow:var(--btn-sh),0 12px 26px -10px rgba(31,94,255,.65)}
+:root[data-theme="dark"] a.btn:hover,:root[data-theme="dark"] button.btn:hover{color:#04122e}
+a.btn:active,button.btn:active{transform:translateY(0);filter:brightness(.97)}
+a.btn.alt,button.btn.alt{background:var(--bg);color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-1)}
+a.btn.alt:hover,button.btn.alt:hover{background:var(--surface);color:var(--ink);border-color:color-mix(in srgb,var(--ink) 25%,var(--line));box-shadow:var(--sh-2)}
+/* gumbi v glavi: bel primarni + steklen sekundarni */
+.hero .btns a.btn{--on-primary:#0b1b4d;animation:none;background:#fff;background-size:auto;color:#0b1b4d;border:1px solid rgba(255,255,255,.9);padding:11px 20px;font-size:14px;font-weight:600;box-shadow:0 1px 2px rgba(5,15,51,.25),0 12px 28px -10px rgba(5,15,51,.55)}
+.hero .btns a.btn:hover{background:#fff;color:#0b1b4d;filter:none;transform:translateY(-2px);box-shadow:0 1px 2px rgba(5,15,51,.25),0 18px 34px -10px rgba(5,15,51,.6)}
+.hero .btns a.btn.alt{background:rgba(8,24,70,.34);color:#fff;border:1px solid rgba(255,255,255,.42);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px -12px rgba(5,15,51,.5)}
+.hero .btns a.btn.alt:hover{background:rgba(8,24,70,.5);color:#fff;border-color:rgba(255,255,255,.6)}
+.hero .btn svg{stroke-width:2}
+.link{font-weight:500}
+.copy,.gal-close{border-radius:12px;font-weight:500;background:var(--bg);box-shadow:var(--sh-1);transition:border-color .2s,color .2s,box-shadow .2s,transform .2s var(--ease)}
+.copy:hover,.gal-close:hover{box-shadow:var(--sh-2);transform:translateY(-1px)}
+.copy{padding:9px 16px}
+
+/* krmilni gumbi v glavi (steklene kartice) */
+.chip,.lightsw{border-radius:16px;border:1px solid rgba(255,255,255,.26);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05)),var(--hero-chip);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 28px -12px rgba(0,0,0,.5);transition:border-color .3s,background-color .3s,box-shadow .3s,transform .25s var(--ease),opacity 1.4s var(--ease)}
+.chip{border-radius:14px}
+.lightsw:hover{border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
+.lightsw[aria-pressed="true"]{border-color:rgba(255,215,94,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 1px rgba(255,215,94,.18),0 10px 28px -12px rgba(255,190,60,.45)}
+.lightsw .st{border-radius:8px;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+.lightsw[aria-pressed="true"] .st{background:linear-gradient(180deg,#ffe58a,#ffd75e);box-shadow:0 2px 8px -2px rgba(255,200,70,.7)}
+.shadesw .arr button{border-radius:8px}
+
+/* razdelki: mehkejši ločilniki */
+section{border-top:1px solid var(--line)}
+.lead{color:var(--muted)}
+
+/* statistika → kartice */
+.stats{border-top:0;gap:16px}
+.stats div,.stats div+div{padding:24px;border:1px solid var(--line);border-left:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(180deg,var(--bg),var(--surface));box-shadow:var(--sh-1)}
+.stats b{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 70%,var(--primary)));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+@media (max-width:560px){.stats div+div{margin-top:0;border-top:1px solid var(--line);padding-left:24px}.stats{gap:12px}}
+
+/* prednosti → kartice */
+.benefits{gap:20px}
+.benefits li{padding:28px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--bg);box-shadow:var(--sh-1);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .3s}
+.benefits li::before{display:none}
+.benefits li:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:color-mix(in srgb,var(--primary) 35%,var(--line))}
+.benefits svg{width:40px;height:40px;padding:9px;border-radius:12px;background:var(--primary-soft);box-sizing:border-box}
+.benefits li:hover svg{transform:none}
+
+/* koraki */
+.steps li::before{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:var(--primary-soft);border:1px solid color-mix(in srgb,var(--primary) 22%,transparent);font-size:12px;line-height:1;margin-top:0}
+.steps li{grid-template-columns:34px 1fr;gap:18px}
+.steps li::after{left:17px;top:42px;background:linear-gradient(var(--line),transparent)}
+.rooms li{background:var(--surface);border-radius:10px;padding:5px 12px}
+.rooms li.on{background:var(--primary-soft)}
+.facts div{border-top-color:var(--line)}
+.gal-hint{font-weight:500}
+
+/* FAQ kartice */
+.faq{display:grid;gap:10px}
+details,details:last-child{border:1px solid var(--line);border-radius:14px;background:var(--bg);box-shadow:var(--sh-1);transition:border-color .25s,box-shadow .25s,background-color .25s}
+details:hover{border-color:color-mix(in srgb,var(--primary) 30%,var(--line))}
+details[open]{background:var(--surface);box-shadow:var(--sh-2);border-color:color-mix(in srgb,var(--primary) 28%,var(--line))}
+summary{padding:20px 22px;font-size:18px;font-weight:600}
+details .ans>div{padding-inline:22px}
+details p{padding-bottom:22px}
+.faq-list{padding-bottom:22px}
+.faq-tbl{border:1px solid var(--line);border-radius:12px;overflow:hidden;border-collapse:separate;border-spacing:0;background:var(--bg)}
+.faq-tbl th,.faq-tbl td{padding:11px 14px;border-bottom:1px solid var(--line)}
+.faq-tbl tr:last-child td{border-bottom:0}
+.faq-tbl{margin-bottom:var(--space-6)}
+.faq-tbl th{background:var(--surface-2);font-family:var(--font-sans);letter-spacing:0;text-transform:none;font-size:13px;font-weight:600;color:var(--ink)}
+
+/* življenjepis in kontakt */
+.timeline li{border-top-color:var(--line)}
+.mail{padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(180deg,var(--bg),var(--surface));box-shadow:var(--sh-1)}
+
+/* galerija */
+.gal-grid figure{border-radius:16px;box-shadow:var(--sh-2);border-color:var(--line)}
+.gal-bar{border-bottom-color:var(--line)}
+
+/* dostopnost */
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:8px}
+@media (max-width:640px){.hero::after{display:none}.hero .scene::after{background:linear-gradient(to bottom,var(--hero-top) 0,transparent 38%),linear-gradient(to top,var(--hero-bg) 0,transparent 16%)}.benefits li{padding:22px}summary{padding:17px 16px;font-size:16.5px}details .ans>div{padding-inline:16px}.mail{padding:14px}.chip,.lightsw{border-radius:14px}}
 </style>
 
 <header id="top">
