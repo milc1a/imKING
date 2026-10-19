@@ -649,6 +649,8 @@ details p{padding-bottom:22px}
   .stats{margin-top:var(--space-12)}
   .sa-demo svg{max-width:520px}
 }
+.blinds.noanim,.blinds.noanim *{transition:none!important}
+:root.int-flip .iwoff,:root.int-flip .glow.iw,:root.int-flip .toff{transition:none!important}
 /* realističen pogled skozi okna in žaluzije: noč (topla notranja razsvetljava) in dan (temno steklo z odsevom neba) */
 :root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurX)"]{filter:sepia(.68) saturate(1.9) hue-rotate(-6deg) contrast(1.65) brightness(.72)}
 :root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurI)"]{filter:brightness(.62)}
@@ -1103,10 +1105,14 @@ details p{padding-bottom:22px}
     }
     var sw=document.getElementById('lightsw'), st=document.getElementById('lightst');
     function toggle(){
+      /* takojšnje preklapljanje: brez prehodov, zato ni vmesnega bliska */
+      bl.classList.add('noanim'); root.classList.add('int-flip'); void bl.offsetWidth;
       off=!off;
       bl.classList.toggle('ioff',off);
       if(off) root.setAttribute('data-int','off'); else root.removeAttribute('data-int');
       if(sw){ sw.setAttribute('aria-pressed',off?'false':'true'); st.textContent=off?'OFF':'ON'; }
+      void bl.offsetWidth;
+      requestAnimationFrame(function(){requestAnimationFrame(function(){ bl.classList.remove('noanim'); root.classList.remove('int-flip'); });});
     }
     document.addEventListener('click',function(e){ if(hit(e)) toggle(); });
     if(sw) sw.addEventListener('click',toggle);
