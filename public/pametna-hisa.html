@@ -631,13 +631,6 @@ details p{padding-bottom:22px}
 .hero.m-port::after,.hero.m-land::after{display:none}
 .hero.m-port .scene::after,.hero.m-land .scene::after{background:linear-gradient(to top,var(--hero-bg) 0,transparent 14%)}
 .hero.m-port .scene,.hero.m-land .scene{animation:none}
-.hero.m-land .scene{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 24%);mask-image:linear-gradient(to right,transparent 0,#000 24%)}
-.hero.m-land .hero-copy{width:var(--tl);max-width:none;margin:0;padding:58px 0 0 24px;text-align:left;justify-items:start}
-.hero.m-land .status{display:none}
-.hero.m-land h1{font-size:clamp(18px,2.7vw,26px);margin-bottom:10px;line-height:1.15}
-.hero.m-land .lead{font-size:12.5px;line-height:17.5px;margin-bottom:0;max-width:none}
-.hero.m-land .btns{justify-content:flex-start;gap:10px}
-.hero.m-land .btns a.btn{padding:8px 14px;font-size:13px}
 .hero.m-land .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
 .hero.m-land .lightsw>span:not(.st):not(.arr){display:none}
 .hero.m-land .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
@@ -646,6 +639,9 @@ details p{padding-bottom:22px}
 .hero.m-land .shadesw .arr button{height:14px;width:34px}
 .hero.m-land .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
 .hero.m-land .place{display:none}
+.hero.m-land .hero-copy{padding-top:56px}
+.hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
+.hero.m-land h1{margin-bottom:14px}
 @media (max-height:520px) and (orientation:landscape){
   .lead{font-size:16px;line-height:25px}
   section{padding-block:72px}
@@ -1286,7 +1282,6 @@ details p{padding-bottom:22px}
     var Wd=window.innerWidth, Hd=window.innerHeight, land=Hd<=520&&Wd>Hd, port=!land&&Wd<=640;
     hero.classList.toggle('m-land',land); hero.classList.toggle('m-port',port);
     var scn=hero.querySelector('.scene'), orbs=[].slice.call(hero.querySelectorAll('.orb'));
-    if(land) hero.style.setProperty('--tl',Math.round(Math.min(hero.clientWidth*.44,380))+'px');
     var W=hero.clientWidth, pB=lead.getBoundingClientRect().bottom-hero.getBoundingClientRect().top;
     if(land||port){
       /* mobilni režim: cela hiša (x 300–1590, od dimnika y=820 do roba slike) je vedno v celoti na zaslonu */
@@ -1303,15 +1298,15 @@ details p{padding-bottom:22px}
         [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw0+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw0+'px'; el.style.height='56px'; el.style.bottom=(16+36+G0)+'px'; });
         ox=W*.1; oy=84;
       } else {
-        var tl=Math.min(W*.44,380), rowH=48, bot=8+rowH+4;
-        sc=Math.max(.2,Math.min((Hd-72-bot-8)/746,(W-tl-12)/1330));
-        bl=(tl+W)/2-HX*sc; bt=Hd-bot-1566*sc;
-        hero.style.minHeight=Hd+'px';
-        btns.style.left='24px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
+        /* ležeče: enako kot na namizju – naslov, gumba, pod njima cela hiša; štirje kontrolni gumbi v vrsti pod sliko */
+        var rowH=48, BANDL=12+rowH+12, Yb2=pB+GAP1+btns.offsetHeight+14;
+        sc=Math.min(.75,W/1330); bt=Yb2-CH*sc; bl=W/2-HX*sc;
+        hero.style.minHeight=Math.ceil(bt+1566*sc+BANDL)+'px';
+        btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
         var bw1=Math.floor((W-2*sd0-3*G0)/4);
-        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=(sd0+3*(bw1+G0))+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=bw1+'px'; c.style.height=rowH+'px'; c.style.padding='0 6px'; c.style.bottom='8px'; });
-        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw1+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw1+'px'; el.style.height=rowH+'px'; el.style.bottom='8px'; });
-        ox=W-34; oy=70;
+        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=(sd0+3*(bw1+G0))+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=bw1+'px'; c.style.height=rowH+'px'; c.style.padding='0 6px'; c.style.bottom='12px'; });
+        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw1+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw1+'px'; el.style.height=rowH+'px'; el.style.bottom='12px'; });
+        ox=W*.1; oy=84;
       }
       scn.style.left=bl+'px'; scn.style.top=bt+'px'; scn.style.right='auto'; scn.style.bottom='auto'; scn.style.width=(1920*sc)+'px'; scn.style.height=(1566*sc)+'px';
       orbs.forEach(function(o){ o.style.left=(ox-bl)+'px'; o.style.top=(oy-bt)+'px'; o.style.width=o.style.height='46px'; });
