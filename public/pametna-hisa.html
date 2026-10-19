@@ -270,7 +270,7 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 
 
 /* mobilna optimizacija */
-@media (max-width:640px){.hero .scene{bottom:calc(var(--lift) + var(--band,0px))}
+@media (max-width:640px){
   .lead{font-size:16.5px;line-height:26px}
   section{padding-block:64px}
   .head{margin-bottom:var(--space-12)}
@@ -508,6 +508,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--space-12)}
 
 .frm{display:none}
 :root[data-theme="dark"] .frm{display:block}
+
 /* ============ moderen profesionalen videz (nadgradnja: barve, gumbi, kartice) ============ */
 :root{
   --ink:#0b1220; --muted:#566178; --line:#e3e8f1; --surface:#f5f8fd; --surface-2:#eef3fb;
@@ -625,7 +626,33 @@ details p{padding-bottom:22px}
 
 /* dostopnost */
 :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:8px}
-@media (max-width:640px){.hero::after{display:none}.hero .scene::after{background:linear-gradient(to bottom,var(--hero-top) 0,transparent 38%),linear-gradient(to top,var(--hero-bg) 0,transparent 16%)}.benefits li{padding:22px}summary{padding:17px 16px;font-size:16.5px}details .ans>div{padding-inline:16px}.mail{padding:14px}.chip,.lightsw{border-radius:14px}}
+@media (max-width:640px){.benefits li{padding:22px}summary{padding:17px 16px;font-size:16.5px}details .ans>div{padding-inline:16px}.mail{padding:14px}.chip,.lightsw{border-radius:14px}}
+/* mobilni režim: pokončno in ležeče – hiša je vedno v celoti vidna (položaj izračuna place()) */
+.hero.m-port::after,.hero.m-land::after{display:none}
+.hero.m-port .scene::after,.hero.m-land .scene::after{background:linear-gradient(to top,var(--hero-bg) 0,transparent 14%)}
+.hero.m-port .scene,.hero.m-land .scene{animation:none}
+.hero.m-land .scene{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 24%);mask-image:linear-gradient(to right,transparent 0,#000 24%)}
+.hero.m-land .hero-copy{width:var(--tl);max-width:none;margin:0;padding:58px 0 0 24px;text-align:left;justify-items:start}
+.hero.m-land .status{display:none}
+.hero.m-land h1{font-size:clamp(18px,2.7vw,26px);margin-bottom:10px;line-height:1.15}
+.hero.m-land .lead{font-size:12.5px;line-height:17.5px;margin-bottom:0;max-width:none}
+.hero.m-land .btns{justify-content:flex-start;gap:10px}
+.hero.m-land .btns a.btn{padding:8px 14px;font-size:13px}
+.hero.m-land .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
+.hero.m-land .lightsw>span:not(.st):not(.arr){display:none}
+.hero.m-land .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
+.hero.m-land .lightsw svg{width:17px;height:17px}
+.hero.m-land .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
+.hero.m-land .shadesw .arr button{height:14px;width:34px}
+.hero.m-land .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
+.hero.m-land .place{display:none}
+@media (max-height:520px) and (orientation:landscape){
+  .lead{font-size:16px;line-height:25px}
+  section{padding-block:72px}
+  .head{margin-bottom:var(--space-12)}
+  .stats{margin-top:var(--space-12)}
+  .sa-demo svg{max-width:520px}
+}
 </style>
 
 <header id="top">
@@ -1231,7 +1258,7 @@ details p{padding-bottom:22px}
     function size(){var r=c.getBoundingClientRect(); c.width=r.width*dpr; c.height=r.height*dpr; S=[];
       var n=Math.round(r.width*r.height/9000);
       for(var i=0;i<n;i++) S.push({x:Math.random()*r.width,y:Math.random()*r.height*.48,r:Math.random()*1+.4,p:Math.random()*6.28,s:.6+Math.random()*1.6});}
-    size(); window.addEventListener('resize',size);
+    size(); window.__stars=size; window.addEventListener('resize',size);
     var on=true; if('IntersectionObserver' in window) new IntersectionObserver(function(e){on=e[0].isIntersecting}).observe(c);
     (function draw(t){
       if(on){x.setTransform(dpr,0,0,dpr,0,0); x.clearRect(0,0,c.width,c.height);
@@ -1256,7 +1283,42 @@ details p{padding-bottom:22px}
   if(!btns||!lead) return;
   var LIFT=32, GAP1=26, GAP2=34;
   function place(){
+    var Wd=window.innerWidth, Hd=window.innerHeight, land=Hd<=520&&Wd>Hd, port=!land&&Wd<=640;
+    hero.classList.toggle('m-land',land); hero.classList.toggle('m-port',port);
+    var scn=hero.querySelector('.scene'), orbs=[].slice.call(hero.querySelectorAll('.orb'));
+    if(land) hero.style.setProperty('--tl',Math.round(Math.min(hero.clientWidth*.44,380))+'px');
     var W=hero.clientWidth, pB=lead.getBoundingClientRect().bottom-hero.getBoundingClientRect().top;
+    if(land||port){
+      /* mobilni režim: cela hiša (x 300–1590, od dimnika y=820 do roba slike) je vedno v celoti na zaslonu */
+      var ls0=document.getElementById('lightsw'), l20=document.getElementById('lightsw2'), sh0=document.getElementById('shadesw'),
+          cs0=[].slice.call(hero.querySelectorAll('.chip')), HX=945, CH=820, sc, bl, bt, ox, oy;
+      var G0=8, sd0=16;
+      if(port){
+        var BAND=132, Yb=pB+GAP1+btns.offsetHeight+14;
+        sc=W/1330; bt=Yb-CH*sc; bl=W/2-HX*sc;
+        hero.style.minHeight=Math.ceil(bt+1566*sc+BAND)+'px';
+        btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
+        var bw0=Math.floor((W-2*sd0-2*G0)/3);
+        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=sd0+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=(W-2*sd0)+'px'; c.style.height='36px'; c.style.padding='0 10px'; c.style.bottom='16px'; });
+        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw0+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw0+'px'; el.style.height='56px'; el.style.bottom=(16+36+G0)+'px'; });
+        ox=W*.1; oy=84;
+      } else {
+        var tl=Math.min(W*.44,380), rowH=48, bot=8+rowH+4;
+        sc=Math.max(.2,Math.min((Hd-72-bot-8)/746,(W-tl-12)/1330));
+        bl=(tl+W)/2-HX*sc; bt=Hd-bot-1566*sc;
+        hero.style.minHeight=Hd+'px';
+        btns.style.left='24px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
+        var bw1=Math.floor((W-2*sd0-3*G0)/4);
+        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=(sd0+3*(bw1+G0))+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=bw1+'px'; c.style.height=rowH+'px'; c.style.padding='0 6px'; c.style.bottom='8px'; });
+        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw1+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw1+'px'; el.style.height=rowH+'px'; el.style.bottom='8px'; });
+        ox=W-34; oy=70;
+      }
+      scn.style.left=bl+'px'; scn.style.top=bt+'px'; scn.style.right='auto'; scn.style.bottom='auto'; scn.style.width=(1920*sc)+'px'; scn.style.height=(1566*sc)+'px';
+      orbs.forEach(function(o){ o.style.left=(ox-bl)+'px'; o.style.top=(oy-bt)+'px'; o.style.width=o.style.height='46px'; });
+      var key=Math.round(1920*sc)+'x'+Math.round(1566*sc); if(place.key!==key){ place.key=key; if(window.__stars) window.__stars(); }
+      return;
+    }
+    place.key=''; ['left','top','right','bottom','width','height'].forEach(function(k){ scn.style[k]=''; orbs.forEach(function(o){ if(k!=='right'&&k!=='bottom') o.style[k]=''; }); });
     var Yc=pB+GAP1+btns.offsetHeight+GAP2, sW=W/1920, H=Yc+LIFT+751*sW, s=sW;
     if(H>1566*sW){ H=(Yc+LIFT)/(1-751/1566); s=H/1566; }
     hero.style.minHeight=Math.ceil(H)+'px';
@@ -1268,13 +1330,6 @@ details p{padding-bottom:22px}
     var ls=document.getElementById('lightsw'), l2=document.getElementById('lightsw2'), sh=document.getElementById('shadesw'),
         chip=hero.querySelector('.chip:not([style*="display: none"])'), cs=[].slice.call(hero.querySelectorAll('.chip'));
     var mob=window.innerWidth<=640, side=(mob?16:24)+'px', GP=10, HH=Math.ceil(H), B=Math.round(Math.max(72, HH-(window.innerHeight-24)+0)); if(HH-72<window.innerHeight-24) B=72;
-    if(mob){
-      B=16; var BAND=16+36+8+56+16; hero.style.setProperty('--band',BAND+'px'); hero.style.minHeight=(HH+BAND)+'px'; /* gumbi pod sliko hiše */
-      var G=8, sd=16, bw=Math.floor((hero.clientWidth-2*sd-2*G)/3);
-      cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=sd+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=(hero.clientWidth-2*sd)+'px'; c.style.height='36px'; c.style.padding='0 10px'; c.style.bottom=B+'px'; });
-      [ls,l2,sh].forEach(function(el,i){ if(!el) return; el.style.left=(sd+i*(bw+G))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw+'px'; el.style.height='56px'; el.style.bottom=(B+36+G)+'px'; });
-      return;
-    }
     hero.style.removeProperty('--band');
     [ls,l2,sh].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
     var chipH=cs.reduce(function(m,c){return Math.max(m,c.offsetHeight);},0)||40;
