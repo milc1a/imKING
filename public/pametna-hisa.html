@@ -290,11 +290,11 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 /* interaktivna shema stikalo → aktuatorji → porabniki */
 .sa-demo svg{overflow:visible;max-width:640px;margin-inline:auto}
 .sad-lines path{stroke:#5fb4ff;stroke-width:1.6;fill:none}
-.sa-demo .z{fill:transparent;stroke:var(--primary);stroke-width:1.4;stroke-dasharray:3 3;opacity:0;cursor:pointer;outline:none;transition:opacity .2s}
-.sa-demo .z:hover,.sa-demo .z:focus-visible{opacity:.8}.sa-demo .z.dis{display:none}
+.sa-demo .z{fill:transparent;stroke:none;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.sa-demo .z:hover,.sa-demo .z:focus,.sa-demo .z:focus-visible,.sa-demo .z:active{outline:none;stroke:none}.sa-demo .z.dis{display:none}
 .sad-disp .ico{filter:grayscale(1) brightness(.5);transition:filter .3s}
 .sad-disp .ico.yel{filter:none}.sad-disp .ico.blind.grn{filter:hue-rotate(-62deg) saturate(1.6)}
-.sad-leds .led{fill:#3a3a3a;transition:fill .2s,filter .2s}.sad-leds .led.on{fill:#37e04a;filter:drop-shadow(0 0 3px #37e04a)}
+.sad-leds .led{fill:#3a3a3a;transition:fill .2s,filter .2s}.sad-leds .led.on{fill:#37e04a;filter:drop-shadow(0 0 3px #37e04a)}.sad-leds .led.yel{fill:#ffc61a;filter:drop-shadow(0 0 4px #ffc61a);transition:none}
 .sad-flash rect{fill:#fff;opacity:0;pointer-events:none;rx:6}
 #sadDot{fill:var(--primary);pointer-events:none}
 .sad-t{fill:var(--muted);font:400 10px var(--font-mono);letter-spacing:.06em}.sad-p{fill:var(--ink);font-size:12px}
@@ -1485,8 +1485,11 @@ details p{padding-bottom:22px}
     $('sadBt').textContent=pos>.97?'ODPRTO':(pos<.03?'ZAPRTO':(posT>pos?'GRE GOR':'GRE DOL')); }
   function bulb(id,L,on){ var b=$(id), g=$(id+'g'), c=on?col(L):'';
     b.style.fill=on?c:'none'; b.style.stroke=on?c:''; b.style.filter=on?'drop-shadow(0 0 '+(2+L/100*8)+'px '+col(L)+')':'none'; g.setAttribute('opacity',on?(.15+.85*L/100).toFixed(2):0); }
+  var busy={};
+  function ledPress(k){ busy[k]=1; draw(); clearTimeout(ledPress[k]); ledPress[k]=setTimeout(function(){ busy[k]=0; draw(); },450); }
   function draw(){ bulb('b1',lvl,lvl>.5); $('b1t').textContent=Math.round(lvl)+' %'; bulb('b2',100,b2); drawBlind();
-    $('lTL').classList.toggle('on',tgt>0||lvl>.5); $('lTR').classList.toggle('on',b2); $('lBR').classList.toggle('on',posT>.5);
+    var LS={lTL:tgt>0||lvl>.5,lTR:b2,lBR:posT>.5};
+    for(var k in LS){ var le=$(k), bz=busy[k]; le.classList.toggle('yel',!!bz); le.classList.toggle('on',!bz&&LS[k]); }
     $('iTL').classList.toggle('yel',tgt>0||lvl>.5); $('iTR').classList.toggle('yel',b2); $('iBR').classList.toggle('grn',posT>.5); }
   var last=0; function tick(t){ var dt=Math.min(.05,(t-last)/1000||0); last=t, ch=false;
     if(lvl!==tgt){ var st=45*dt; lvl=lvl<tgt?Math.min(tgt,lvl+st):Math.max(tgt,lvl-st); ch=true; }
@@ -1499,7 +1502,7 @@ details p{padding-bottom:22px}
     function f(ts){ if(t0===null) t0=ts; var k=Math.min(1,(ts-t0)/dur), pt=p.getPointAtLength(len*k); dot.setAttribute('cx',pt.x); dot.setAttribute('cy',pt.y);
       if(k<1) requestAnimationFrame(f); else { dot.setAttribute('opacity',0); if(cb) cb(); } } requestAnimationFrame(f); }
   var P1='M150 200H182V97H215', P2='M150 200H182V293H205';
-  function flash(id){ var e=$(id); e.style.transition='none'; e.style.opacity=.35; requestAnimationFrame(function(){ e.style.transition='opacity .5s'; e.style.opacity=0; }); }
+  function flash(id){ ledPress('l'+id.slice(1)); var e=$(id); e.style.transition='none'; e.style.opacity=.35; requestAnimationFrame(function(){ e.style.transition='opacity .5s'; e.style.opacity=0; }); }
   function dimm(){ flash('fTL'); telegram(P1,function(){ tgt=(tgt>=100||lvl>50&&tgt!==0)?0:100; }); }
   function lamp2(){ flash('fTR'); telegram(P2,function(){ b2=!b2; draw(); }); }
   function both(){ flash('fTR'); flash('fTL'); telegram(P1,function(){ tgt=100; }); telegram(P2,function(){ b2=true; draw(); }); }
