@@ -1455,7 +1455,7 @@ details p{padding-bottom:22px}
   var dlg=document.getElementById('galsh'), fig=dlg&&dlg.querySelector('.shfig'), img=fig&&fig.querySelector('img'); if(!fig||!img) return;
   /* ikone na sliki Smart Home: svetlo modra obarvanost simbola + napisa, klik odpre ustrezno sliko */
   var HS=[ ['sp','Spalnica',667,527,86,86], ['ko','Kopalnica',495,699,86,86], ['al','Alarm',753,331,86,82],
-           ['se','Senčila',804,815,90,60], ['al','Alarm',896,815,90,60], ['og','HVAC – Ogrevanje',989,815,90,60] ];
+           ['tl','Tloris',712,815,90,60], ['se','Senčila',804,815,90,60], ['al','Alarm',896,815,90,60], ['og','HVAC – Ogrevanje',989,815,90,60] ];
   HS.forEach(function(h){
     var b=document.createElement('button'), c=document.createElement('canvas');
     b.type='button'; b.className='shsp'; b.setAttribute('aria-label',h[1]); b.setAttribute('aria-haspopup','dialog'); c.className='shtint'; c.setAttribute('aria-hidden','true');
