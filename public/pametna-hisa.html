@@ -1538,7 +1538,7 @@ details p{padding-bottom:22px}
 </script>
 <script>
 (function(){
-  /* vhodna vrata: klik jih odpre navznoter (vrtenje okoli levega tečaja), ponovni klik jih zapre */
+  /* vhodna vrata: klik jih odpre navznoter (vrtenje okoli desnega tečaja), ponovni klik jih zapre */
   var hero=document.querySelector('.hero'), svg=document.getElementById('doorSvg'), im=document.getElementById('doorImg');
   if(!hero||!svg||!im) return;
   var root=document.documentElement, RX=977, RY=986, RW=47, RH=120, K=4;      /* območje v koordinatah prizora, K = povečava platna */
@@ -1579,19 +1579,20 @@ details p{padding-bottom:22px}
     interior();
     var c=Math.cos(theta), sn=Math.sin(theta), N=src.width, kp=0.22;
     var lx=(LX-RX)*K, ly0=(LY-RY)*K, lh=LH*K, hor=(HOR-RY)*K;
-    var lastX=-1;
+    var hx=lx+N;                                       /* tečaj je na desnem robu krila */
     for(var i=0;i<N;i++){
-      var z=(i/N)*sn;                                  /* globina točke na krilu */
-      var dx=lx+(i/N)*N*c*(1/(1+kp*z*.5));            /* vodoravni položaj (z rahlim perspektivnim krčenjem) */
+      var u=(N-i)/N, z=u*sn;                           /* u = oddaljenost od tečaja, z = globina točke */
+      var fx=1/(1+kp*z*.5);
+      var dx=hx-u*N*c*fx;                              /* vodoravni položaj (z rahlim perspektivnim krčenjem) */
       var pf=1/(1+kp*z);                               /* navpično pomanjšanje glede na globino */
       var top=hor-(hor-ly0)*pf, bot=hor-(hor-(ly0+lh))*pf;
-      var wpx=Math.max(1,(N*c/N)*(1/(1+kp*z*.5)));
+      var wpx=Math.max(1,N*c*fx/N);
       g.drawImage(src,i,0,1,src.height,dx,top,wpx+.6,bot-top);
     }
     /* senčenje krila, ko se obrača stran od svetlobe */
     g.globalCompositeOperation='source-atop';
-    var sh=.5*sn; if(sh>0){ g.fillStyle='rgba(0,0,0,'+sh.toFixed(3)+')'; /* le območje krila */
-      var xe=lx+N*c*(1/(1+kp*sn*.5)); g.save(); g.beginPath(); g.rect(lx,0,Math.max(1,xe-lx)+1,cv.height); g.clip(); g.fillRect(0,0,cv.width,cv.height); g.restore(); }
+    var sh=.5*sn; if(sh>0){ g.fillStyle='rgba(0,0,0,'+sh.toFixed(3)+')';
+      var xe=hx-N*c*(1/(1+kp*sn*.5)); g.save(); g.beginPath(); g.rect(xe-1,0,hx-xe+2,cv.height); g.clip(); g.fillRect(0,0,cv.width,cv.height); g.restore(); }
     g.globalCompositeOperation='source-over';
     im.setAttribute('href',cv.toDataURL('image/png'));
   }
