@@ -9,5 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: ["https://imking.si/images/hero-day.jpg"],
     },
+    {
+      url: "https://imking.si/trgovina",
+      lastModified: new Date("2026-11-06"),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
   ];
 }

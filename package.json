@@ -10,7 +10,8 @@
   "dependencies": {
     "next": "16.4.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "@vercel/blob": ">=1.0.0"
   },
   "devDependencies": {
     "@types/node": "22.18.6",
