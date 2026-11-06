@@ -1,12 +1,13 @@
 export default function ShopBar({ active }: { active?: "trgovina" }) {
   return (
-    <>
     <div className="sh-bar">
+      <a className="sh-backbtn" href="/">
+        ← Nazaj
+      </a>
       <a className="sh-logo" href="/">
         IM<span>KING</span>
       </a>
       <nav className="sh-nav" aria-label="Glavni meni">
-        <a href="/">Domov</a>
         <a href="/#reference">Reference</a>
         <a href="/#kontakt">Kontakt</a>
         <a href="/trgovina" aria-current={active === "trgovina" ? "page" : undefined}>
@@ -14,9 +15,5 @@ export default function ShopBar({ active }: { active?: "trgovina" }) {
         </a>
       </nav>
     </div>
-    <div className="sh-back">
-      <a href="/">← Nazaj na osnovno stran</a>
-    </div>
-    </>
   );
 }
