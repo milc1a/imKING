@@ -2,7 +2,10 @@ export default function ShopBar({ active }: { active?: "trgovina" }) {
   return (
     <div className="sh-bar">
       <a className="sh-logo" href="/">
-        IM<span>KING</span>
+        <i aria-hidden="true" />
+        <b style={{ fontWeight: "inherit" }}>
+          IM<span>KING</span>
+        </b>
       </a>
       <nav className="sh-nav" aria-label="Glavni meni">
         <a href="/#reference">Reference</a>
