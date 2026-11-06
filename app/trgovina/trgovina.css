@@ -35,3 +35,7 @@
 .sh-row b{display:block;font-weight:600}
 .sh-row span{color:var(--muted);font-size:14px}
 .sh-row .sh-btn{margin-left:auto}
+.sh-back{max-width:1080px;width:100%;margin:0 auto;padding:20px 24px 0}
+.sh-back a{display:inline-block;font-size:15px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+.sh-back a:hover{border-color:var(--ink);color:var(--ink)}
+.sh-back+.sh-main{padding-top:28px}

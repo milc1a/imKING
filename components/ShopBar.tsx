@@ -1,5 +1,6 @@
 export default function ShopBar({ active }: { active?: "trgovina" }) {
   return (
+    <>
     <div className="sh-bar">
       <a className="sh-logo" href="/">
         IM<span>KING</span>
@@ -13,5 +14,9 @@ export default function ShopBar({ active }: { active?: "trgovina" }) {
         </a>
       </nav>
     </div>
+    <div className="sh-back">
+      <a href="/">← Nazaj na osnovno stran</a>
+    </div>
+    </>
   );
 }
