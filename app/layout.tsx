@@ -7,7 +7,7 @@ const manrope = Manrope({ subsets: ["latin", "latin-ext"], weight: ["500", "600"
 const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], weight: ["400", "500"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://imking.si"),
+  metadataBase: new URL("https://www.imking.si"),
   title: "imKING – Pametne KNX inštalacije",
   description:
     "imKING – načrtovanje, integracija in programiranje pametnih KNX inštalacij za stanovanjske in poslovne objekte.",

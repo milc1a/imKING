@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Trgovina | imKING",
   description: "Spletna trgovina imKING – izdelki za pametno hišo in KNX inštalacije.",
-  alternates: { canonical: "https://imking.si/trgovina" },
+  alternates: { canonical: "https://www.imking.si/trgovina" },
 };
 
 export default async function Trgovina({ searchParams }: { searchParams: Promise<{ napaka?: string }> }) {
