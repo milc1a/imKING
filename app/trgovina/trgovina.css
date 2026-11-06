@@ -35,7 +35,4 @@
 .sh-row b{display:block;font-weight:600}
 .sh-row span{color:var(--muted);font-size:14px}
 .sh-row .sh-btn{margin-left:auto}
-.sh-backbtn{font:500 15px/20px var(--font-sans);padding:9px 16px;border-radius:8px;background:var(--primary);color:var(--on-primary);text-decoration:none;white-space:nowrap}
-.sh-backbtn:hover{background:var(--primary-strong);color:var(--on-primary)}
 .sh-bar .sh-logo{margin-right:auto}
-@media (max-width:520px){.sh-bar .sh-logo{display:none}.sh-bar{padding:12px 16px}}
