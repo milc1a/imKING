@@ -651,13 +651,23 @@ details p{padding-bottom:22px}
 .hero.m-port .scene::after,.hero.m-land .scene::after{background:linear-gradient(to top,var(--hero-bg) 0,transparent 14%)}
 .hero.m-port .scene,.hero.m-land .scene{animation:none}
 .hero.m-land .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
+.hero.m-port .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
 .hero.m-land .lightsw>span:not(.st):not(.arr){display:none}
+.hero.m-port .lightsw>span:not(.st):not(.arr){display:none}
 .hero.m-land .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
+.hero.m-port .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
 .hero.m-land .lightsw svg{width:17px;height:17px}
+.hero.m-port .lightsw svg{width:17px;height:17px}
 .hero.m-land .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
+.hero.m-port .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
 .hero.m-land .shadesw .arr button{height:14px;width:34px}
+.hero.m-port .shadesw .arr button{height:14px;width:34px}
 .hero.m-land .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
+.hero.m-port .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
 
+.hero.m-port .chip>span,.hero.m-land .chip>span{display:none}
+.hero.m-port .chip b,.hero.m-land .chip b{font-weight:500}
+.hero.m-port .place,.hero.m-land .place{top:auto;bottom:14px;left:12px;font-size:11px;line-height:15px}
 .hero.m-land .hero-copy{padding-top:56px}
 .hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
 .hero.m-land h1{margin-bottom:14px}
@@ -1385,26 +1395,15 @@ details p{padding-bottom:22px}
       var ls0=document.getElementById('lightsw'), l20=document.getElementById('lightsw2'), sh0=document.getElementById('shadesw'),
           cs0=[].slice.call(hero.querySelectorAll('.chip')), HX=945, CH=820, sc, bl, bt, ox, oy;
       var G0=8, sd0=16;
-      if(port){
-        var BAND=132, Yb=pB+GAP1+btns.offsetHeight+14;
-        sc=W/1330; bt=Yb-CH*sc; bl=W/2-HX*sc;
-        hero.style.minHeight=Math.ceil(bt+1566*sc+BAND)+'px';
-        btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
-        var bw0=Math.floor((W-2*sd0-2*G0)/3);
-        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=sd0+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=(W-2*sd0)+'px'; c.style.height='36px'; c.style.padding='0 10px'; c.style.bottom='16px'; });
-        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw0+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw0+'px'; el.style.height='56px'; el.style.bottom=(16+36+G0)+'px'; });
-        ox=W*.1; oy=84;
-      } else {
-        /* ležeče: enako kot na namizju – naslov, gumba, pod njima cela hiša; štirje kontrolni gumbi v vrsti pod sliko */
-        var rowH=48, BANDL=12+rowH+12, Yb2=pB+GAP1+btns.offsetHeight+14;
-        sc=Math.min(.75,W/1330); bt=Yb2-CH*sc; bl=W/2-HX*sc;
-        hero.style.minHeight=Math.ceil(bt+1566*sc+BANDL)+'px';
-        btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
-        var bw1=Math.floor((W-2*sd0-3*G0)/4);
-        cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.left=(sd0+3*(bw1+G0))+'px'; c.style.right='auto'; c.style.top='auto'; c.style.width=bw1+'px'; c.style.height=rowH+'px'; c.style.padding='0 6px'; c.style.bottom='12px'; });
-        [ls0,l20,sh0].forEach(function(el,i){ if(!el) return; el.style.left=(sd0+i*(bw1+G0))+'px'; el.style.right='auto'; el.style.top='auto'; el.style.width=bw1+'px'; el.style.height=rowH+'px'; el.style.bottom='12px'; });
-        ox=W*.1; oy=84;
-      }
+      var pw=port?96:112, ph=port?42:46, gpp=6, chH=26, side0=port?10:16, band=port?64:44;
+      var Yb=pB+GAP1+btns.offsetHeight+14;
+      sc=port?W/1330:Math.min(.75,W/1330); bt=Yb-CH*sc; bl=W/2-HX*sc;
+      hero.style.minHeight=Math.ceil(bt+1566*sc+band)+'px';
+      btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
+      cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.right=side0+'px'; c.style.left='auto'; c.style.top='auto'; c.style.width=pw+'px'; c.style.height=chH+'px'; c.style.padding='0 6px'; c.style.bottom='14px'; });
+      var yb=14+chH+gpp;
+      [sh0,l20,ls0].forEach(function(el){ if(!el) return; el.style.right=side0+'px'; el.style.left='auto'; el.style.top='auto'; el.style.width=pw+'px'; el.style.height=ph+'px'; el.style.bottom=yb+'px'; yb+=ph+gpp; });
+      ox=W*.1; oy=84;
       scn.style.left=bl+'px'; scn.style.top=bt+'px'; scn.style.right='auto'; scn.style.bottom='auto'; scn.style.width=(1920*sc)+'px'; scn.style.height=(1566*sc)+'px';
       orbs.forEach(function(o){ o.style.left=(ox-bl)+'px'; o.style.top=(oy-bt)+'px'; o.style.width=o.style.height='46px'; });
       var key=Math.round(1920*sc)+'x'+Math.round(1566*sc); if(place.key!==key){ place.key=key; if(window.__stars) window.__stars(); }
