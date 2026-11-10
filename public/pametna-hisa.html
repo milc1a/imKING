@@ -202,7 +202,7 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .chip i{width:7px;height:7px;border-radius:50%;background:rgb(var(--warm));box-shadow:0 0 10px rgb(var(--warm))}
 .chip.day-only i{background:var(--primary);box-shadow:0 0 10px var(--primary)}
 .chip.day-only{opacity:calc(1 - var(--is-night))}.chip.night-only{opacity:var(--is-night)}
-.place{position:absolute;z-index:3;pointer-events:none;left:var(--space-6);top:min(calc(100svh - 44px),calc(100% - 44px));font-size:13px;line-height:18px;color:#fff;letter-spacing:.04em;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 12px rgba(0,0,0,.6)}
+.place{position:absolute;z-index:3;pointer-events:none;left:var(--space-6);top:min(calc(100svh - 76px),calc(100% - 76px));font-size:13px;line-height:18px;color:#fff;letter-spacing:.04em;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 12px rgba(0,0,0,.6)}
 @media (max-width:640px){.place{left:var(--space-4);top:calc(100% - 128px)}.chip{left:var(--space-4);right:auto;bottom:var(--space-4)}}
 /* blinds: an overlay of the day photo's shutters; clicking the sun lifts them halfway */
 :root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#refl)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#hill)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#vig)"],:root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurS)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[filter="url(#grain)"]{opacity:0}
@@ -657,7 +657,8 @@ details p{padding-bottom:22px}
 :root[data-theme="light"] .hero .place{color:#fff;font-weight:500;background:rgba(6,24,66,.5);padding:4px 10px;border-radius:8px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-shadow:none}
 :root[data-theme="light"] .hero .chip,:root[data-theme="light"] .hero .lightsw{background:rgba(6,24,66,.5);border-color:rgba(255,255,255,.5)}
 
-.hero.m-port .place,.hero.m-land .place{top:auto;bottom:14px;left:12px;font-size:11px;line-height:15px}
+.hero.m-port .place,.hero.m-land .place{top:auto;bottom:80px;left:12px;font-size:11px;line-height:15px}
+.hero.m-land .place{bottom:60px}
 .hero.m-port .lead{font-size:14px;line-height:22px}
 /* gumbi in scena: povsem enaki kot na namizju (iste mere in pisava), le pomanjšani (scale) glede na širino zaslona */
 .hero.m-port .lightsw,.hero.m-land .lightsw{min-width:262px;font:500 11.5px/16px var(--font-mono);letter-spacing:.08em;padding:9px 14px 9px 12px;gap:10px;border-radius:16px}
