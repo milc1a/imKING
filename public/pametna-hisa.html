@@ -203,8 +203,8 @@ section{padding-block:var(--space-40);border-top:1px solid var(--line)}
 .chip i{width:7px;height:7px;border-radius:50%;background:rgb(var(--warm));box-shadow:0 0 10px rgb(var(--warm))}
 .chip.day-only i{background:var(--primary);box-shadow:0 0 10px var(--primary)}
 .chip.day-only{opacity:calc(1 - var(--is-night))}.chip.night-only{opacity:var(--is-night)}
-.place{position:absolute;left:var(--space-6);bottom:var(--space-6);font-size:12px;line-height:16px;color:var(--hero-muted);letter-spacing:.04em}
-@media (max-width:640px){.place{display:none}.chip{left:var(--space-4);right:auto;bottom:var(--space-4)}}
+.place{position:absolute;z-index:3;pointer-events:none;left:var(--space-6);top:min(calc(100svh - 44px),calc(100% - 44px));font-size:13px;line-height:18px;color:#fff;letter-spacing:.04em;text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 12px rgba(0,0,0,.6)}
+@media (max-width:640px){.place{left:var(--space-4);top:calc(100% - 128px)}.chip{left:var(--space-4);right:auto;bottom:var(--space-4)}}
 /* blinds: an overlay of the day photo's shutters; clicking the sun lifts them halfway */
 :root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#refl)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#hill)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[fill="url(#vig)"],:root[data-theme="dark"] .blinds:not(.ioff) g[filter="url(#blurS)"],:root[data-theme="dark"] .blinds:not(.ioff) rect[filter="url(#grain)"]{opacity:0}
 .blinds{pointer-events:none}
@@ -657,7 +657,7 @@ details p{padding-bottom:22px}
 .hero.m-land .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
 .hero.m-land .shadesw .arr button{height:14px;width:34px}
 .hero.m-land .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
-.hero.m-land .place{display:none}
+
 .hero.m-land .hero-copy{padding-top:56px}
 .hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
 .hero.m-land h1{margin-bottom:14px}
