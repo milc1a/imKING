@@ -28,12 +28,9 @@ export default async function Trgovina({ searchParams }: { searchParams: Promise
       <ShopBar active="trgovina" />
       <main className="sh-main">
         <h1>Trgovina</h1>
-        <p className="sh-lead">Izdelki za pametno hišo in KNX inštalacije. Plačilo s kartico poteka varno prek Stripe.</p>
         {napaka && <p className="sh-err">Nakupa ni bilo mogoče začeti. Poskusite znova.</p>}
         {failed && <p className="sh-note">Trgovine trenutno ni mogoče naložiti. Poskusite znova čez nekaj trenutkov.</p>}
-        {!failed && products.length === 0 && (
-          <p className="sh-note">Trgovina bo kmalu odprta. Za povpraševanje nas kontaktirajte.</p>
-        )}
+        {!failed && products.length === 0 && <p className="sh-note">Trenutno neaktivno</p>}
         <div className="sh-grid">
           {products.map((p) => (
             <article className="sh-card" key={p.id}>
