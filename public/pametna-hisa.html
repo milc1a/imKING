@@ -654,6 +654,11 @@ details p{padding-bottom:22px}
 .hero.m-port .lead{font-size:14px;line-height:22px}
 /* gumbi in scena: povsem enaki kot na namizju (iste mere in pisava), le pomanjšani (scale) glede na širino zaslona */
 .hero.m-port .lightsw,.hero.m-land .lightsw{min-width:262px;font:500 11.5px/16px var(--font-mono);letter-spacing:.08em;padding:9px 14px 9px 12px;gap:10px;border-radius:16px}
+.hero.m-port .lightsw{display:grid;grid-template-columns:auto 1fr auto;column-gap:8px;align-items:center;justify-content:normal;min-width:0;padding:9px 10px 9px 10px;font-size:10.5px;letter-spacing:.06em}
+.hero.m-port .lightsw svg{width:18px;height:18px}
+.hero.m-port .lightsw>span:not(.st):not(.arr){display:block;text-align:center;white-space:nowrap}
+.hero.m-port .lightsw::after,.hero.m-land .lightsw::after{display:none}
+.hero.m-land .lightsw>span:not(.st):not(.arr){display:block}
 .hero.m-port .chip,.hero.m-land .chip{font:400 12px/16px var(--font-mono);gap:8px;border-radius:14px;white-space:nowrap}
 .hero.m-land .hero-copy{padding-top:84px}
 .hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
@@ -1398,6 +1403,8 @@ details p{padding-bottom:22px}
       hero.style.minHeight=Math.ceil(bt+1566*sc+band)+'px';
       btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
       [ls0,l20,sh0].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
+      var mw=Math.max(ls0?ls0.offsetWidth:0,l20?l20.offsetWidth:0,sh0?sh0.offsetWidth:0);
+      [ls0,l20,sh0].forEach(function(el){ if(el&&mw) el.style.width=mw+'px'; });
       var hh=ls0?ls0.offsetHeight:42;
       cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls0){ c.style.width=ls0.offsetWidth+'px'; c.style.height=hh+'px'; } c.style.right=side0+'px'; c.style.left='auto'; c.style.top='auto'; c.style.bottom=B0+'px'; c.style.scale=k; c.style.transformOrigin='right bottom'; });
       var yb=B0+(hh+GP0)*k+hh*k;
