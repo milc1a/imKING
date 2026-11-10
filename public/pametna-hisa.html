@@ -649,31 +649,12 @@ details p{padding-bottom:22px}
 .hero.m-port::after,.hero.m-land::after{display:none}
 .hero.m-port .scene::after,.hero.m-land .scene::after{background:linear-gradient(to top,var(--hero-bg) 0,transparent 14%)}
 .hero.m-port .scene,.hero.m-land .scene{animation:none}
-.hero.m-land .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
-.hero.m-port .lightsw{min-width:0;box-sizing:border-box;display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;column-gap:8px;row-gap:2px;padding:4px 6px;border-radius:14px;font-size:10px}
-.hero.m-land .lightsw>span:not(.st):not(.arr){display:none}
-.hero.m-port .lightsw>span:not(.st):not(.arr){display:none}
-.hero.m-land .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
-.hero.m-port .lightsw::after{content:attr(data-s);grid-column:1/-1;text-align:center;font:500 9.5px/11px var(--font-mono);letter-spacing:.08em}
-.hero.m-land .lightsw svg{width:17px;height:17px}
-.hero.m-port .lightsw svg{width:17px;height:17px}
-.hero.m-land .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
-.hero.m-port .lightsw .st{min-width:26px;padding:0 6px;font-size:10px}
-.hero.m-land .shadesw .arr button{height:14px;width:34px}
-.hero.m-port .shadesw .arr button{height:14px;width:34px}
-.hero.m-land .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
-.hero.m-port .chip{justify-content:center;font-size:9px;line-height:13px;gap:5px;border-radius:14px;white-space:nowrap;overflow:hidden}
 
-.hero.m-port .chip>span,.hero.m-land .chip>span{display:none}
-.hero.m-port .chip b,.hero.m-land .chip b{font-weight:500}
 .hero.m-port .place,.hero.m-land .place{top:auto;bottom:14px;left:12px;font-size:11px;line-height:15px}
 .hero.m-port .lead{font-size:14px;line-height:22px}
-.hero.m-port .lightsw{padding:3px 4px;row-gap:1px;column-gap:6px;border-radius:11px}
-.hero.m-port .lightsw svg{width:14px;height:14px}
-.hero.m-port .lightsw::after{font-size:8px;line-height:9px}
-.hero.m-port .lightsw .st{min-width:22px;padding:0 5px;font-size:9px}
-.hero.m-port .shadesw .arr button{height:11px;width:28px}
-.hero.m-port .chip{font-size:8px;line-height:11px;border-radius:11px;padding:0 4px}
+/* gumbi in scena: povsem enaki kot na namizju (iste mere in pisava), le pomanjšani (scale) glede na širino zaslona */
+.hero.m-port .lightsw,.hero.m-land .lightsw{min-width:262px;font:500 11.5px/16px var(--font-mono);letter-spacing:.08em;padding:9px 14px 9px 12px;gap:10px;border-radius:16px}
+.hero.m-port .chip,.hero.m-land .chip{font:400 12px/16px var(--font-mono);gap:8px;border-radius:14px;white-space:nowrap}
 .hero.m-land .hero-copy{padding-top:84px}
 .hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
 .hero.m-land h1{margin-bottom:14px}
@@ -1411,14 +1392,16 @@ details p{padding-bottom:22px}
       var ls0=document.getElementById('lightsw'), l20=document.getElementById('lightsw2'), sh0=document.getElementById('shadesw'),
           cs0=[].slice.call(hero.querySelectorAll('.chip')), HX=945, CH=820, sc, bl, bt, ox, oy;
       var G0=8, sd0=16;
-      var pw=port?80:112, ph=port?36:46, gpp=5, chH=port?22:26, side0=port?10:16, band=port?64:44;
+      var k=port?Math.min(.62,W/700):Math.min(.9,W/1000), side0=port?10:16, B0=14, GP0=10, band=port?64:44;
       var Yb=pB+GAP1+btns.offsetHeight+14;
       sc=port?W/1330:Math.min(.75,W/1330); bt=Yb-CH*sc; bl=W/2-HX*sc;
       hero.style.minHeight=Math.ceil(bt+1566*sc+band)+'px';
       btns.style.left=Math.round((W-btns.offsetWidth)/2)+'px'; btns.style.right='auto'; btns.style.bottom='auto'; btns.style.top=Math.round(pB+GAP1)+'px';
-      cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.right=side0+'px'; c.style.left='auto'; c.style.top='auto'; c.style.width=pw+'px'; c.style.height=chH+'px'; c.style.padding='0 6px'; c.style.bottom='14px'; });
-      var yb=14+chH+gpp;
-      [sh0,l20,ls0].forEach(function(el){ if(!el) return; el.style.right=side0+'px'; el.style.left='auto'; el.style.top='auto'; el.style.width=pw+'px'; el.style.height=ph+'px'; el.style.bottom=yb+'px'; yb+=ph+gpp; });
+      [ls0,l20,sh0].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
+      var hh=ls0?ls0.offsetHeight:42;
+      cs0.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls0){ c.style.width=ls0.offsetWidth+'px'; c.style.height=hh+'px'; } c.style.right=side0+'px'; c.style.left='auto'; c.style.top='auto'; c.style.bottom=B0+'px'; c.style.scale=k; c.style.transformOrigin='right bottom'; });
+      var yb=B0+(hh+GP0)*k+hh*k;
+      [sh0,l20,ls0].forEach(function(el){ if(!el) return; el.style.right=side0+'px'; el.style.left='auto'; el.style.top='auto'; el.style.bottom=yb+'px'; el.style.scale=k; el.style.transformOrigin='right bottom'; yb+=((el.offsetHeight||hh)+GP0)*k; });
       ox=W*.1; oy=84;
       scn.style.left=bl+'px'; scn.style.top=bt+'px'; scn.style.right='auto'; scn.style.bottom='auto'; scn.style.width=(1920*sc)+'px'; scn.style.height=(1566*sc)+'px';
       orbs.forEach(function(o){ o.style.left=(ox-bl)+'px'; o.style.top=(oy-bt)+'px'; o.style.width=o.style.height='46px'; });
@@ -1438,7 +1421,8 @@ details p{padding-bottom:22px}
         chip=hero.querySelector('.chip:not([style*="display: none"])'), cs=[].slice.call(hero.querySelectorAll('.chip'));
     var mob=window.innerWidth<=640, side=(mob?16:24)+'px', GP=10, HH=Math.ceil(H), B=Math.round(Math.max(72, HH-(window.innerHeight-24)+0)); if(HH-72<window.innerHeight-24) B=72;
     hero.style.removeProperty('--band');
-    [ls,l2,sh].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; } });
+    [ls,l2,sh].forEach(function(el){ if(el){ el.style.width=''; el.style.height=''; el.style.scale=''; } });
+    [].slice.call(hero.querySelectorAll('.chip')).forEach(function(c){ c.style.scale=''; });
     var chipH=cs.reduce(function(m,c){return Math.max(m,c.offsetHeight);},0)||40;
     cs.forEach(function(c){ c.style.boxSizing='border-box'; c.style.justifyContent='center'; c.style.padding='0 12px'; c.style.gap='8px'; if(ls){ c.style.width=ls.offsetWidth+'px'; c.style.height=ls.offsetHeight+'px'; } });
     chipH=ls?ls.offsetHeight:chipH;
