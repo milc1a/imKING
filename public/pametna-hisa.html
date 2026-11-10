@@ -652,8 +652,9 @@ details p{padding-bottom:22px}
 .bandfill{display:none;position:absolute;z-index:-1;pointer-events:none;max-width:none}
 :root[data-theme="light"] .hero.m-port .bandfill,:root[data-theme="light"] .hero.m-land .bandfill{display:block}
 :root[data-theme="light"] .hero.m-port .scene::after,:root[data-theme="light"] .hero.m-land .scene::after{display:none}
-/* svetla tema: spodnji del slike (pod tablico in roko) je zatemnjen, da so napisi bolj vidni */
-:root[data-theme="light"] .hero:not(.m-port):not(.m-land) .scene::after{background:linear-gradient(to bottom,var(--hero-top) 0,transparent 38%),linear-gradient(to top,rgba(4,22,64,.62) 0,rgba(4,22,64,.32) 9%,transparent 24%)}
+:root[data-theme="light"] .hero:not(.m-port):not(.m-land) .scene::after{background:linear-gradient(to bottom,var(--hero-top) 0,transparent 38%),linear-gradient(to top,#fff 0,rgba(255,255,255,.7) 6%,rgba(255,255,255,.3) 14%,transparent 26%)}
+/* svetla tema na telefonu: mehek prehod slike v belo ozadje strani (kot na namizju) */
+:root[data-theme="light"] .hero.m-port::after,:root[data-theme="light"] .hero.m-land::after{display:block;height:120px;background:linear-gradient(to bottom,transparent 0,var(--hero-fade) 100%)}
 :root[data-theme="light"] .hero .place{color:#fff;font-weight:500;background:rgba(6,24,66,.5);padding:4px 10px;border-radius:8px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-shadow:none}
 :root[data-theme="light"] .hero .chip,:root[data-theme="light"] .hero .lightsw{background:rgba(6,24,66,.5);border-color:rgba(255,255,255,.5)}
 
