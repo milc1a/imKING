@@ -667,7 +667,14 @@ details p{padding-bottom:22px}
 .hero.m-port .chip>span,.hero.m-land .chip>span{display:none}
 .hero.m-port .chip b,.hero.m-land .chip b{font-weight:500}
 .hero.m-port .place,.hero.m-land .place{top:auto;bottom:14px;left:12px;font-size:11px;line-height:15px}
-.hero.m-land .hero-copy{padding-top:56px}
+.hero.m-port .lead{font-size:14px;line-height:22px}
+.hero.m-port .lightsw{padding:3px 4px;row-gap:1px;column-gap:6px;border-radius:11px}
+.hero.m-port .lightsw svg{width:14px;height:14px}
+.hero.m-port .lightsw::after{font-size:8px;line-height:9px}
+.hero.m-port .lightsw .st{min-width:22px;padding:0 5px;font-size:9px}
+.hero.m-port .shadesw .arr button{height:11px;width:28px}
+.hero.m-port .chip{font-size:8px;line-height:11px;border-radius:11px;padding:0 4px}
+.hero.m-land .hero-copy{padding-top:84px}
 .hero.m-land .lead{font-size:15.5px;line-height:24px;margin-bottom:28px}
 .hero.m-land h1{margin-bottom:14px}
 @media (max-height:520px) and (orientation:landscape){
@@ -1404,7 +1411,7 @@ details p{padding-bottom:22px}
       var ls0=document.getElementById('lightsw'), l20=document.getElementById('lightsw2'), sh0=document.getElementById('shadesw'),
           cs0=[].slice.call(hero.querySelectorAll('.chip')), HX=945, CH=820, sc, bl, bt, ox, oy;
       var G0=8, sd0=16;
-      var pw=port?96:112, ph=port?42:46, gpp=6, chH=26, side0=port?10:16, band=port?64:44;
+      var pw=port?80:112, ph=port?36:46, gpp=5, chH=port?22:26, side0=port?10:16, band=port?64:44;
       var Yb=pB+GAP1+btns.offsetHeight+14;
       sc=port?W/1330:Math.min(.75,W/1330); bt=Yb-CH*sc; bl=W/2-HX*sc;
       hero.style.minHeight=Math.ceil(bt+1566*sc+band)+'px';
