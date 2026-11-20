@@ -1579,7 +1579,7 @@ details p{padding-bottom:22px}
   var src=document.createElement('canvas'), sg=src.getContext('2d');
   var theta=0, target=0, anim=null, MAXA=84*Math.PI/180;
   function dark(){ var t=root.getAttribute('data-theme'); if(t) return t==='dark'; return window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches; }
-  function srcImg(){ return document.querySelector(dark()?'img.night-only':'img.day-only'); }
+  function srcImg(){ return document.querySelector(dark()?'.scene img.night-only':'.scene img.day-only'); }
   var hall=new Image(); hall.onload=function(){ if(theta>0) draw(); }; hall.src="img/d0f5ae26dd.webp";
   function interior(){
     var lit=dark()&&root.getAttribute('data-int')!=='off';
@@ -1600,11 +1600,6 @@ details p{padding-bottom:22px}
     var sc=img.naturalWidth/1920;
     src.width=Math.round(LW*K); src.height=Math.round(LH*K);
     sg.imageSmoothingQuality='high'; sg.drawImage(img,LX*sc,LY*sc,LW*sc,LH*sc,0,0,src.width,src.height);
-    if(!dark()&&theta>0){ /* dnevni način: steklo krila se takoj prelije v polno, vidno krilo kot ponoči */
-      var ni=document.querySelector('img.night-only'); var a=Math.min(1,theta/.22);
-      if(ni&&ni.naturalWidth){ var ns=ni.naturalWidth/1920;
-        sg.save(); sg.globalAlpha=a; sg.drawImage(ni,LX*ns,LY*ns,LW*ns,LH*ns,0,0,src.width,src.height);
-        sg.globalCompositeOperation='multiply'; sg.globalAlpha=a; sg.fillStyle='#c9cdd6'; sg.fillRect(0,0,src.width,src.height); sg.restore(); } }
     g.clearRect(0,0,cv.width,cv.height);
     g.imageSmoothingQuality='high';
     /* okvir in okolica (nespremenjeno) */
@@ -1634,7 +1629,7 @@ details p{padding-bottom:22px}
   function run(){
     cancelAnimationFrame(anim);
     var from=theta, to=target, t0=null, dur=1500*Math.max(.25,Math.abs(to-from)/MAXA);
-    show(true);
+    draw(); show(true);
     function step(ts){
       if(t0===null) t0=ts; var t=Math.min(1,(ts-t0)/dur);
       theta=from+(to-from)*ease(t); draw();
